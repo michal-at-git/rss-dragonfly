@@ -1,11 +1,14 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
-#ąść
+
+
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys
 from feedparser import *
 
+
+from feed_ruler import * #EXPERIMENTAL!!!!!!
 
 
 class nut:
@@ -33,6 +36,24 @@ class rss_squirrel(QDialog):
         self.przejdz = QPushButton(u'Otwórz');
         self.zpliku = QPushButton(u'z pliku');
         self.zamknij = QPushButton(u'Zamknij');
+        self.lista = QListWidget();
+        
+        
+        
+        
+        
+        for i in feedr().flist:
+	  
+	  self.lista.addItem(i);
+        
+        
+        
+        
+        
+        
+        
+        #void itemClicked (QListWidgetItem *) // WAZNY SYGNAL
+        
         
         layout = QVBoxLayout()
         linlayout = QHBoxLayout();
@@ -44,7 +65,8 @@ class rss_squirrel(QDialog):
         linlayout.addWidget(self.zpliku)
         linlayout.addWidget(self.zamknij)
         
-        layout.addWidget(self.widok)
+        layout.addWidget(self.lista);
+        layout.addWidget(self.widok);
 
         layout.addLayout(linlayout2);
 
