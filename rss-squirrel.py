@@ -58,15 +58,17 @@ class rss_squirrel(QDialog):
         layout = QVBoxLayout()
         linlayout = QHBoxLayout();
         linlayout2 = QHBoxLayout();
-
+	linlayoutcont = QHBoxLayout();
         
         layout.addLayout(linlayout);
-
+	layout.addLayout(linlayoutcont)
+	
         linlayout.addWidget(self.zpliku)
         linlayout.addWidget(self.zamknij)
-        
-        layout.addWidget(self.lista);
-        layout.addWidget(self.widok);
+        self.lista.setMaximumWidth(200)
+   
+        linlayoutcont.addWidget(self.lista);
+        linlayoutcont.addWidget(self.widok);
 
         layout.addLayout(linlayout2);
 
@@ -75,7 +77,7 @@ class rss_squirrel(QDialog):
         linlayout2.addWidget(self.przejdz)
         
         self.setLayout(layout)
-	self.setGeometry(400, 300, 420,500)
+	self.setGeometry(400, 180, 600,500)
         self.setWindowTitle("RSS Squirrel")
         self.setWindowIcon(QIcon('ikonka.png'))
 	
@@ -106,7 +108,7 @@ class rss_squirrel(QDialog):
 	
     def filerss(self):
        
-       plik = getOpenFileName(self, '', '.')
+       plik = QFileDialog.getOpenFileName(self, '', '.')
        self.run(plik);
         
 rsssq = QApplication(sys.argv)
