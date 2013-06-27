@@ -84,8 +84,10 @@ class rss_squirrel(QDialog):
 	self.connect(self.przejdz, SIGNAL("clicked()"), self.run)
 	self.connect(self.zpliku, SIGNAL("clicked()"), self.filerss)
 	self.connect(self.zamknij, SIGNAL("clicked()"), rsssq.quit)
-
+	self.lista.itemActivated.connect(self.openfeed)
 	
+    def openfeed(self, lista):
+      self.run("feeds/"+lista.text()+".rss")
 	
     def run(self, adr=None):
      
