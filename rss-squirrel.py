@@ -11,6 +11,10 @@ from feedparser import *
 from feed_ruler import * #EXPERIMENTAL!!!!!!
 
 
+#test update
+#test = feedr();
+#test.feed_add("google", "http://google.pl")
+
 class nut:
   def __init__(self, addr=None):
     
@@ -55,7 +59,6 @@ class rss_squirrel(QDialog):
         
         layout = QVBoxLayout()
         linlayout = QHBoxLayout();
-        linlayout2 = QHBoxLayout();
 	linlayoutcont = QHBoxLayout();
         listlayout = QVBoxLayout();
 	addrem = QHBoxLayout();
@@ -68,6 +71,9 @@ class rss_squirrel(QDialog):
 	
         linlayout.addWidget(self.zpliku)
         linlayout.addWidget(self.zamknij)
+        linlayout.addWidget(self.adres)
+        linlayout.addWidget(self.przejdz)
+        
         self.lista.setMaximumWidth(200)
         listlayout.addWidget(self.lista)
 	
@@ -80,11 +86,9 @@ class rss_squirrel(QDialog):
                 
         linlayoutcont.addWidget(self.widok);
 
-        layout.addLayout(linlayout2);
 
 
-        linlayout2.addWidget(self.adres)
-        linlayout2.addWidget(self.przejdz)
+        
         
         self.setLayout(layout)
 	self.setGeometry(400, 180, 600,500)
