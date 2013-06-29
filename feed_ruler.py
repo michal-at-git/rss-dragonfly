@@ -45,5 +45,5 @@ class feedr():
     self.li = []
     for i in listdir("feeds/"):
 	  
-	  if (re.compile("\w+.xml$").match(i)): li.append(i)
+	  if (re.compile("\w+.xml$").match(i)): self.li.append(i)
 	
