@@ -10,6 +10,7 @@ from feedparser import *
 
 from feed_ruler import * #EXPERIMENTAL!!!!!!
 
+import pop_ups
 
 #test update
 #test = feedr();
@@ -99,6 +100,7 @@ class rss_squirrel(QDialog):
 	self.connect(self.zpliku, SIGNAL("clicked()"), self.filerss)
 	self.connect(self.zamknij, SIGNAL("clicked()"), rsssq.quit)
 	self.lista.itemActivated.connect(self.openfeed)
+	self.connect(self.dodaj, SIGNAL("clicked()"), self.update)
 
     def openfeed(self, lista):
       self.run("feeds/"+lista.text()+".rss")
@@ -126,7 +128,12 @@ class rss_squirrel(QDialog):
        
        plik = QFileDialog.getOpenFileName(self, '', '.')
        self.run(plik);
-        
+    def update(self):
+       pop_ups.manage()
+       self.lista.clear()
+       for i in feedr().flist: self.lista.addItem(i);
+ 
+
 rsssq = QApplication(sys.argv)
 rss_sq = rss_squirrel()
 rss_sq.show()

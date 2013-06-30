@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 
-
+#ważne! ustawić otwieranie plików na lower() <- w pliku rss-squirrel - to od odpowiada za to!
 
 from xml.dom import minidom
 #from os import *
@@ -29,7 +29,8 @@ class feedr():
   def feed_add(self, name, addr):
     if re.compile(u"^[a-ząćęłśźż]+[a-ząćęłśźż]$").match(lower(name)):
       update = self.feeds[0].toxml("utf-8");
-      update = "<?xml version=\"1.0\"?>"+update[0:len(update)-11]+"""  <feed>
+      update = """<?xml version=\"1.0\"?>
+      """+update[0:len(update)-11]+"""  <feed>
       <addr>"""+addr+"""</addr>
       <name>"""+name+"""</name>
   </feed>
