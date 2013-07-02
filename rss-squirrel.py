@@ -8,13 +8,9 @@ import sys
 from feedparser import *
 
 
-from feed_ruler import * #EXPERIMENTAL!!!!!!
-
+from feed_ruler import *
 import pop_ups
-
-#test update
-#test = feedr();
-#test.feed_add("google", "http://google.pl")
+from string import lower
 
 class nut:
   def __init__(self, addr=None):
@@ -105,7 +101,7 @@ class rss_squirrel(QDialog):
 
 
     def openfeed(self, lista):
-      self.run("feeds/"+lista.text()+".rss")
+      self.run("feeds/"+lower(str(lista.text()))+".rss")
 
     def run(self, adr=None):
      
@@ -125,7 +121,7 @@ class rss_squirrel(QDialog):
 
       except:
 	self.widok.setText("<h1>"+u'Nie można załadować kanału rss'+"</h1>")
-
+	self.setWindowTitle(u"Nie można załadować kanału rss | RSS Squirrel")
     def filerss(self):
        
        plik = QFileDialog.getOpenFileName(self, '', '.')

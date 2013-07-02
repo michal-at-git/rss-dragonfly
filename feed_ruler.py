@@ -1,7 +1,6 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 
-#ważne! ustawić otwieranie plików na lower() <- w pliku rss-squirrel - to od odpowiada za to!
 
 from xml.dom import minidom
 #from os import *
