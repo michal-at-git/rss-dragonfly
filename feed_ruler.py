@@ -40,11 +40,11 @@ class feedr():
       feedlistfile.close()
       #name+".xml"
     
-  def feed_rm(self,name,addr):
+  def feed_rm(self,name):
     x = open("feeds.xml", "r")
     txt = x.read();
     rm = """<feed>
-      <addr>"""+addr+"""</addr>
+      <addr>"""+self.flist[name]+"""</addr>
       <name>"""+name+"""</name>
   </feed>"""
     txt = txt.replace(rm, "");

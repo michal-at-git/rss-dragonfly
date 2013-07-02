@@ -135,8 +135,9 @@ class rss_squirrel(QDialog):
        self.lista.clear()
        for i in feedr().flist: self.lista.addItem(i);
     def update_rm(self):
-       0000000;
-
+       feedr().feed_rm(str(self.lista.selectedItems()[0].text()));
+       self.lista.clear()
+       for i in feedr().flist: self.lista.addItem(i);
 rsssq = QApplication(sys.argv)
 rss_sq = rss_squirrel()
 rss_sq.show()
