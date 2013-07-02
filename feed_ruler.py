@@ -40,7 +40,18 @@ class feedr():
       feedlistfile.close()
       #name+".xml"
     
-      
+  def feed_rm(self,name,addr):
+    x = open("feeds.xml", "r")
+    txt = x.read();
+    rm = """<feed>
+      <addr>"""+addr+"""</addr>
+      <name>"""+name+"""</name>
+  </feed>"""
+    txt = txt.replace(rm, "");
+    x.close();
+    x = open("feeds.xml", "w")
+    x.write(txt);
+    x.close();
   def feed_is(self): 
     # może kiedyś to się przyda? ;)
     self.li = []

@@ -56,7 +56,7 @@ class rss_squirrel(QDialog):
 
 	  self.lista.addItem(i);
 
-	  
+
         
         layout = QVBoxLayout()
         linlayout = QHBoxLayout();
@@ -67,9 +67,9 @@ class rss_squirrel(QDialog):
         	
         layout.addLayout(linlayout);
 	layout.addLayout(linlayoutcont)
-	
+
 	linlayoutcont.addLayout(listlayout)
-	
+
         linlayout.addWidget(self.zpliku)
         linlayout.addWidget(self.zamknij)
         linlayout.addWidget(self.adres)
@@ -77,7 +77,7 @@ class rss_squirrel(QDialog):
         
         self.lista.setMaximumWidth(200)
         listlayout.addWidget(self.lista)
-	
+
         listlayout.addLayout(addrem)
         
         addrem.addWidget(self.dodaj);
@@ -100,7 +100,9 @@ class rss_squirrel(QDialog):
 	self.connect(self.zpliku, SIGNAL("clicked()"), self.filerss)
 	self.connect(self.zamknij, SIGNAL("clicked()"), rsssq.quit)
 	self.lista.itemActivated.connect(self.openfeed)
-	self.connect(self.dodaj, SIGNAL("clicked()"), self.update)
+	self.connect(self.dodaj, SIGNAL("clicked()"), self.update_add)
+	self.connect(self.usun, SIGNAL("clicked()"), self.update_rm)
+
 
     def openfeed(self, lista):
       self.run("feeds/"+lista.text()+".rss")
@@ -128,11 +130,12 @@ class rss_squirrel(QDialog):
        
        plik = QFileDialog.getOpenFileName(self, '', '.')
        self.run(plik);
-    def update(self):
+    def update_add(self):
        pop_ups.manage()
        self.lista.clear()
        for i in feedr().flist: self.lista.addItem(i);
- 
+    def update_rm(self):
+       0000000;
 
 rsssq = QApplication(sys.argv)
 rss_sq = rss_squirrel()
