@@ -44,11 +44,12 @@ class manage(QDialog):
 	self.connect(self.add, SIGNAL("clicked()"), self.dodaj)
 	self.exec_()
 
-	
+
     def dodaj(self):
 	test = feedr();
-	test.feed_add(str(self.nazw.text()), str(self.nazw.text()))
+	test.feed_add(str(self.nazw.text()), str(self.adres.text()))
 
 	#c.feed_add("...", "http://")
 	self.close();
 	return True
+	
