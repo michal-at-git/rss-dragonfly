@@ -11,6 +11,7 @@ from feedparser import *
 from feed_ruler import *
 import pop_ups
 from string import lower
+import urllib
 
 class nut:
   def __init__(self, addr=None):
@@ -127,9 +128,15 @@ class rss_squirrel(QDialog):
        plik = QFileDialog.getOpenFileName(self, '', '.')
        self.run(plik);
     def update_add(self):
-       pop_ups.manage()
+       dod = pop_ups.manage()
+       zrodlo = urllib.urlopen(str(dod.adres.text()));
+       cel = open("feeds/"+lower(str(dod.nazw.text()))+".rss", "w")
+       cel.write(zrodlo.read())
+       cel.close()
+       
        self.lista.clear()
        for i in feedr().flist: self.lista.addItem(i);
+       
     def update_rm(self):
        feedr().feed_rm(str(self.lista.selectedItems()[0].text()));
        self.lista.clear()
