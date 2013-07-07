@@ -102,7 +102,7 @@ class rss_squirrel(QDialog):
 
 
     def openfeed(self, lista):
-      self.run("feeds/"+lower(str(lista.text()))+".rss")
+      self.run("feeds/"+lower(str(lista.text())).replace(" ", "")+".rss")
 
     def run(self, adr=None):
      
@@ -130,7 +130,7 @@ class rss_squirrel(QDialog):
     def update_add(self):
        dod = pop_ups.manage()
        zrodlo = urllib.urlopen(str(dod.adres.text()));
-       cel = open("feeds/"+lower(str(dod.nazw.text()))+".rss", "w")
+       cel = open(u"feeds/"+lower(str(dod.nazw.text())).replace(" ", "")+".rss", "w")
        cel.write(zrodlo.read())
        cel.close()
        

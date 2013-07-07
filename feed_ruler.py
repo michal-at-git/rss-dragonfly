@@ -26,7 +26,7 @@ class feedr():
     #finally:
       #x.close();
   def feed_add(self, name, addr):
-    if re.compile(u"^[a-ząćęłśźż]+[a-ząćęłśźż]$").match(lower(name)):
+    if re.compile(u"^[a-ząćęłśźż ]+[a-ząćęłśźż ]$").match(lower(name)):
       update = self.feeds[0].toxml("utf-8");
       update = """<?xml version=\"1.0\"?>
       """+update[0:len(update)-11]+"""  <feed>
