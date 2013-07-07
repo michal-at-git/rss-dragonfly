@@ -23,7 +23,8 @@ prosty agragator rss
 #### beta 1:
 - zmiana nazw na język angielski
 - uporządkowanie kodu i doprowadzenie do końcowej postaci
-w opracowaniu...
+- przygotowanie instalatora linuksowego w bashu
+(lista w opracowaniu...)
 
 #### rc
 w opracowaniu
