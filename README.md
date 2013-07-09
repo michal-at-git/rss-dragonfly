@@ -3,11 +3,8 @@ prosty agragator rss
 
 ###do zrobienia:
 
-#### alpha 1:
-- wyjątki przy nieprawidłowych adresach rss - dodawanie nowych [przełożone] 
-- replace w nazwach plików tak aby można było stworzyć nazwę "Ciekawy feed" i plik był zapisywany jako "ciekawyfeed.rss" [zrobione]
-- wstępne porządki w kodzie i wstępna zmiana części nazw na język angielski
-
+#### alpha 1
+[zrobione]
 #### alpha 2:
 
 - dalszy etap porządkowania kodu i zmiana nazw na angielski

@@ -21,6 +21,43 @@ class nut:
     self.frss = parse(str(self.addr))  
     
     
+class __rew_rss_squirrel(QDialog):
+  def __init__(self, parent=None):
+    super(__rew_rss_squirrel, self).__init__(parent)
+    self.init();
+      
+  def init(self):
+    self.rssContentView = QTextBrowser();
+    self.addr = QLineEdit();
+    self.fromFileButt = QPushButton(u'Otwórz');
+    self.closeButt = QPushButton(u'Zamknij');
+    self.addButt = QPushButton();
+    self.rmButt = QPushButton();
+    
+    self.addButt.setIcon(QIcon("plus.png"))
+    self.rmButt.setIcon(QIcon("minus.png"))
+    
+    self.feedList = QListWidget
+    for i in feedr().flist:
+      self.feedList.addItem(i);
+      
+    #layouts
+    
+    mainLayout = QVBoxLayout();
+    topLinLayout = QHBoxLayout();
+    midLinLayout = QHBoxLayout();
+    listLayout = QVBoxLayout();
+    listButtLayout = QHBoxLayout();
+    
+    mainLayout.addLayout(topLinLayout);
+    mainLayout.addLayout(midLinLayout);
+    
+    topLinLayout.addWidget(self.fromFileButt);
+    topLinLayout.addWidget(self.closeButt);
+    topLinLayout.addWidget(self.addr);
+    
+    midLinLayout.addLayout(listLayout)
+    midLinLayout.addWidget(self.rssContentView);
     
     
     
