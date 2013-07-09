@@ -12,6 +12,7 @@ from feed_ruler import *
 import pop_ups
 from string import lower
 import urllib
+from os import remove
 
 class nut:
   def __init__(self, addr=None):
@@ -135,9 +136,13 @@ class rss_squirrel(QDialog):
        cel.close()
        
        self.lista.clear()
-       for i in feedr().flist: self.lista.addItem(i);
+       #for i in feedr().flist: self.lista.addItem(i);
        
     def update_rm(self):
+
+    
+       remove("feeds/"+lower(str(self.lista.selectedItems()[0].text()).replace(" ", ""))+".rss");
+
        feedr().feed_rm(str(self.lista.selectedItems()[0].text()));
        self.lista.clear()
        for i in feedr().flist: self.lista.addItem(i);
