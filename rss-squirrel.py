@@ -136,7 +136,7 @@ class rss_squirrel(QDialog):
        cel.close()
        
        self.lista.clear()
-       #for i in feedr().flist: self.lista.addItem(i);
+       for i in feedr().flist: self.lista.addItem(i);
        
     def update_rm(self):
 
