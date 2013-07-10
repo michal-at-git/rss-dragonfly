@@ -26,7 +26,8 @@ class squirrelGUI(QDialog):
  def init(self):
     self.rssContentView = QTextBrowser();
     self.addr = QLineEdit();
-    self.fromFileButt = QPushButton(u'Otwórz');
+    self.goButt = QPushButton(u'Otwórz');
+    self.fromFileButt = QPushButton(u'z pliku');
     self.closeButt = QPushButton(u'Zamknij');
     self.addButt = QPushButton();
     self.rmButt = QPushButton();
@@ -55,6 +56,7 @@ class squirrelGUI(QDialog):
     topLinLayout.addWidget(self.fromFileButt);
     topLinLayout.addWidget(self.closeButt);
     topLinLayout.addWidget(self.addr);
+    topLinLayout.addWidget(self.goButt);
     
     midLinLayout.addLayout(listLayout);
     
@@ -75,6 +77,30 @@ class _rss_squirrel(squirrelGUI):
     super(_rss_squirrel, self).__init__(parent)
     self.init()
     self.rssContentView.setText("<h1>Witaj w RSS Squirrel!!!</h1>");
+    
+    
+    self.connect(self.goButt, SIGNAL("clicked()"), self.readFeed)
+
+    
+    
+    
+  def readFeed(self, link=None):
+    try:
+      if (link == None):
+	x = nut(self.addr.text());
+      else: x=nut(link);
+      self.rssContentView.setText("<h1>"+x.frss.feed.title+"</h1>");
+      i = 0;
+      self.setWindowTitle(x.frss.feed.title+" | RSS Squirrel")
+      
+      for n in x.frss.entries:
+	self.rssContentView.append("<h2>"+x.frss.entries[i].title+"</h2>");
+	self.rssContentView.append(x.frss.entries[i].description);
+	i += 1
+	
+    except:
+      self.rssContentView.setText("<h1>"+u'Nie można załadować kanału rss'+"</h1>")
+      self.setWindowTitle(u"Nie można załadować kanału rss | RSS Squirrel")
 
     
     
