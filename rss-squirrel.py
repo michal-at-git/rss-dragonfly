@@ -19,14 +19,11 @@ class nut:
     
     self.addr = addr
     self.frss = parse(str(self.addr))  
+
+   
     
-    
-class __rew_rss_squirrel(QDialog):
-  def __init__(self, parent=None):
-    super(__rew_rss_squirrel, self).__init__(parent)
-    self.init();
-      
-  def init(self):
+class squirrelGUI(QDialog):
+ def init(self):
     self.rssContentView = QTextBrowser();
     self.addr = QLineEdit();
     self.fromFileButt = QPushButton(u'Otwórz');
@@ -36,8 +33,11 @@ class __rew_rss_squirrel(QDialog):
     
     self.addButt.setIcon(QIcon("plus.png"))
     self.rmButt.setIcon(QIcon("minus.png"))
+
+    #list
     
-    self.feedList = QListWidget
+    self.feedList = QListWidget()
+    self.feedList.setMaximumWidth(200)
     for i in feedr().flist:
       self.feedList.addItem(i);
       
@@ -56,11 +56,36 @@ class __rew_rss_squirrel(QDialog):
     topLinLayout.addWidget(self.closeButt);
     topLinLayout.addWidget(self.addr);
     
-    midLinLayout.addLayout(listLayout)
+    midLinLayout.addLayout(listLayout);
+    
+    listLayout.addWidget(self.feedList);
+    listLayout.addLayout(listButtLayout);
+    listButtLayout.addWidget(self.addButt);
+    listButtLayout.addWidget(self.rmButt);
+    
     midLinLayout.addWidget(self.rssContentView);
+
+    self.setLayout(mainLayout);
+    self.setGeometry(400, 180, 600,500);
+    self.setWindowIcon(QIcon('ikonka.png'));
+    self.setWindowTitle("RSS Squirrel")
+    
+class _rss_squirrel(squirrelGUI):
+  def __init__(self, parent=None):
+    super(_rss_squirrel, self).__init__(parent)
+    self.init()
+    self.rssContentView.setText("<h1>Witaj w RSS Squirrel!!!</h1>");
+
     
     
     
+    
+#=====================================================================
+#@@@@@@@	STARY MODEL			@@@@@@@@@@@@@@@@@@@@@@
+#=====================================================================
+
+
+
 class rss_squirrel(QDialog):
     def __init__(self, parent=None):
         super(rss_squirrel, self).__init__(parent)
@@ -184,6 +209,6 @@ class rss_squirrel(QDialog):
        self.lista.clear()
        for i in feedr().flist: self.lista.addItem(i);
 rsssq = QApplication(sys.argv)
-rss_sq = rss_squirrel()
+rss_sq = rss_squirrel() #rss_sq = _rss_squirrel() #można przełączyć na tryb testowy
 rss_sq.show()
 rsssq.exec_()
