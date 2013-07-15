@@ -21,14 +21,14 @@ class feedr():
       
     except:
       x = open("feeds.xml", "w");
-      x.write('<?xml version=\"1.0\"?>\n<feedlist>\n</feedlist>');
+      x.write('<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<feedlist>\n</feedlist>');
       x.close();
     #finally:
       #x.close();
   def feed_add(self, name, addr):
     if re.compile(u"^[a-ząćęłśźż ]+[a-ząćęłśźż ]$").match(lower(name)):
       update = self.feeds[0].toxml("utf-8");
-      update = """<?xml version=\"1.0\"?>
+      update = """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
       """+update[0:len(update)-11]+"""  <feed>
       <addr>"""+addr+"""</addr>
       <name>"""+name+"""</name>
