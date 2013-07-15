@@ -8,7 +8,7 @@ prosty agragator rss
 #### alpha 2:
 
 - dalszy etap porządkowania kodu i zmiana nazw na angielski
-- pubDate
+- pubDate [zrobione]
 - otwieranie zakładki tuż po dodaniu do listy
 - ładniejsza strona powitalna
 - ładniejsza prezentacja kanałów RSS

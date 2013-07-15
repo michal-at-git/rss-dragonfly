@@ -30,11 +30,13 @@ class squirrelGUI(QDialog):
     self.fromFileButt = QPushButton(u'z pliku');
     self.closeButt = QPushButton(u'Zamknij');
     self.addButt = QPushButton();
+    self.relButt = QPushButton();
     self.rmButt = QPushButton();
     
     self.addButt.setIcon(QIcon("plus.png"))
+    self.relButt.setIcon(QIcon("reload.png"))
     self.rmButt.setIcon(QIcon("minus.png"))
-
+    
     #list
     
     self.feedList = QListWidget()
@@ -63,6 +65,7 @@ class squirrelGUI(QDialog):
     listLayout.addWidget(self.feedList);
     listLayout.addLayout(listButtLayout);
     listButtLayout.addWidget(self.addButt);
+    listButtLayout.addWidget(self.relButt);
     listButtLayout.addWidget(self.rmButt);
     
     midLinLayout.addWidget(self.rssContentView);
@@ -80,7 +83,8 @@ class _rss_squirrel(squirrelGUI):
     
     
     self.connect(self.goButt, SIGNAL("clicked()"), self.readFeed)
-
+    self.connect(self.fromFileButt, SIGNAL("clicked()"), self.fromFile)
+    self.connect(self.closeButt, SIGNAL("clicked()"), rsssq.quit)
     
     
     
@@ -95,12 +99,21 @@ class _rss_squirrel(squirrelGUI):
       
       for n in x.frss.entries:
 	self.rssContentView.append("<h2>"+x.frss.entries[i].title+"</h2>");
+	self.rssContentView.append("<i>"+x.frss.entries[i].published+"</i>");
 	self.rssContentView.append(x.frss.entries[i].description);
 	i += 1
 	
     except:
       self.rssContentView.setText("<h1>"+u'Nie można załadować kanału rss'+"</h1>")
       self.setWindowTitle(u"Nie można załadować kanału rss | RSS Squirrel")
+      
+      
+  def readExistFeed(self, FList):
+    self.readFeed("feeds/"+lower(str(FList.text())).replace(" ", "")+".rss") #FList -> arg wysył z self.lista.itemActivated.connect(self.openfeed)
+
+  def fromFile(self):
+    feedFile = QFileDialog.getOpenFileName(self, '', '*.rss')
+    self.readFeed(feedFile);
 
     
     
@@ -129,6 +142,8 @@ class rss_squirrel(QDialog):
         self.zamknij = QPushButton(u'Zamknij');
         self.dodaj = QPushButton();
         self.dodaj.setIcon(QIcon("plus.png"))
+        self.odsw = QPushButton();
+        self.odsw = setIcon(QIcon("reload.png"));
         self.usun = QPushButton();
         self.usun.setIcon(QIcon("minus.png"))
 
@@ -167,7 +182,7 @@ class rss_squirrel(QDialog):
         listlayout.addLayout(addrem)
         
         addrem.addWidget(self.dodaj);
-
+        addrem.addWidget(self.odsw);
         addrem.addWidget(self.usun);
 
                 
@@ -206,6 +221,7 @@ class rss_squirrel(QDialog):
 	self.setWindowTitle(x.frss.feed.title+" | RSS Squirrel")
 	for n in x.frss.entries:
 	  self.widok.append("<h2>"+x.frss.entries[i].title+"</h2>");
+	  self.widok.append("<i>"+x.frss.entries[i].published+"</i>");
 	  self.widok.append(x.frss.entries[i].description);
 	  i += 1
 
