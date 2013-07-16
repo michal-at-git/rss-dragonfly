@@ -37,8 +37,7 @@ class squirrelGUI(QDialog):
     self.relButt.setIcon(QIcon("reload.png"))
     self.rmButt.setIcon(QIcon("minus.png"))
     
-    #disable all buttons
-    self.addButt.setEnabled(False)
+    #disable buttons
     self.relButt.setEnabled(False)
     self.rmButt.setEnabled(False)
 
@@ -127,7 +126,6 @@ class rss_squirrel(squirrelGUI):
     self.readFeed("feeds/"+lower(str(FList.text())).replace(" ", "")+".rss") #FList -> arg wysył z self.lista.itemActivated.connect(self.openfeed)
 
     #enabling buttons
-    self.addButt.setEnabled(True)
     self.relButt.setEnabled(True)
     self.rmButt.setEnabled(True)
     
