@@ -85,6 +85,10 @@ class _rss_squirrel(squirrelGUI):
     self.connect(self.goButt, SIGNAL("clicked()"), self.readFeed)
     self.connect(self.fromFileButt, SIGNAL("clicked()"), self.fromFile)
     self.connect(self.closeButt, SIGNAL("clicked()"), rsssq.quit)
+    self.feedList.itemActivated.connect(self.readExistFeed)
+    
+    self.connect(self.addButt, SIGNAL("clicked()"), self.addFeed)
+    self.connect(self.rmButt, SIGNAL("clicked()"), self.rmFeed)
     
     
     
@@ -271,6 +275,6 @@ class rss_squirrel(QDialog):
        self.lista.clear()
        for i in feedr().flist: self.lista.addItem(i);
 rsssq = QApplication(sys.argv)
-rss_sq = rss_squirrel() #rss_sq = _rss_squirrel() #można przełączyć na tryb testowy
+rss_sq = _rss_squirrel() #rss_sq = _rss_squirrel() #można przełączyć na tryb testowy
 rss_sq.show()
 rsssq.exec_()
