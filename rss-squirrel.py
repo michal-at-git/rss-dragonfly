@@ -114,6 +114,26 @@ class _rss_squirrel(squirrelGUI):
   def fromFile(self):
     feedFile = QFileDialog.getOpenFileName(self, '', '*.rss')
     self.readFeed(feedFile);
+    
+
+  def addFeed(self):
+    element = pop_ups.manage()
+    source = urllib.urlopen(str(element.adres.text()));  #element adres z pop_pups
+    target = open(u"feeds/"+lower(str(element.nazw.text())).replace(" ", "")+".rss", "w") #nazw - pop_ups
+    target.write(source.read())
+    target.close()
+    
+    self.feedList.clear();
+    for i in feedr().flist: self.feedList.addItem(i);  #feedr() <-> feed_ruler
+    
+  def rmFeed(self):
+    remove("feeds/"+lower(str(self.feedList.selectedItems()[0].text()).replace(" ", ""))+".rss");
+    feedr().feed_rm(str(self.feedList.selectedItems()[0].text()));
+    
+    self.feedList.clear()
+    
+    for i in feedr().flist: self.feedList.addItem(i);
+    
 
     
     
