@@ -143,7 +143,7 @@ class rss_squirrel(QDialog):
         self.dodaj = QPushButton();
         self.dodaj.setIcon(QIcon("plus.png"))
         self.odsw = QPushButton();
-        self.odsw = setIcon(QIcon("reload.png"));
+        self.odsw.setIcon(QIcon("reload.png"));
         self.usun = QPushButton();
         self.usun.setIcon(QIcon("minus.png"))
 
