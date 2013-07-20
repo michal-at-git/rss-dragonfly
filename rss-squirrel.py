@@ -143,8 +143,16 @@ class rss_squirrel(squirrelGUI):
     target.close()
     
     self.feedList.clear();
-    for i in feedr().flist: self.feedList.addItem(i);  #feedr() <-> feed_ruler
-  
+    i = 0; stop = False;
+    for j in feedr().flist: 
+      self.feedList.addItem(j);        #feedr() <-> feed_ruler
+      if (stop == False and j != element.nazw.text()): 
+	i += 1
+      else: stop = True
+      
+    self.feedList.item(i).setSelected(True);
+    self.readExistFeed(self.feedList.selectedItems()[0])
+    
   def updateFeeds(self):
     for obj in feedr().flist:
       

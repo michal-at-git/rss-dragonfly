@@ -9,7 +9,7 @@ prosty agragator rss
 
 - dalszy etap porządkowania kodu i zmiana nazw na angielski [zrobione]
 - pubDate [zrobione]
-- otwieranie zakładki tuż po dodaniu do listy 
+- otwieranie zakładki tuż po dodaniu do listy [zrobione]
 - ładniejsza strona powitalna [wycofane - qt słabo radzi sobie z arkuszami stylu]
 - ładniejsza prezentacja kanałów RSS [wycofane - qt słabo radzi sobie z arkuszami stylu]
 - opcja odświeżania kanałów RSS z listy [zrobione]
@@ -17,11 +17,16 @@ prosty agragator rss
 - okienko "o programie" [wycofane - w następnych wydaniach]
 
 
+
 #### beta 1:
+- nowa strona główna programu
 - zmiana nazw na język angielski
 - uporządkowanie kodu i doprowadzenie do końcowej postaci
+- poprawki obsługi unicode
+- poprawki ze znakami specjalnymi w tytułach
+- poprawki z niepoprawnymi adresami
 - przygotowanie instalatora linuksowego w bashu
-(lista w opracowaniu...)
+######(lista w opracowaniu...)
 
 #### rc
 w opracowaniu
