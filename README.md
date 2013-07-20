@@ -9,12 +9,12 @@ prosty agragator rss
 
 - dalszy etap porządkowania kodu i zmiana nazw na angielski [zrobione]
 - pubDate [zrobione]
-- otwieranie zakładki tuż po dodaniu do listy
+- otwieranie zakładki tuż po dodaniu do listy 
 - ładniejsza strona powitalna [wycofane - qt słabo radzi sobie z arkuszami stylu]
 - ładniejsza prezentacja kanałów RSS [wycofane - qt słabo radzi sobie z arkuszami stylu]
-- opcja odświeżania kanałów RSS z listy
-- dodanie tooltip'ów
-- okienko "o programie"
+- opcja odświeżania kanałów RSS z listy [zrobione]
+- dodanie tooltip'ów [zrobione]
+- okienko "o programie" [wycofane - w następnych wydaniach]
 
 
 #### beta 1:

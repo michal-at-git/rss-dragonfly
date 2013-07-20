@@ -38,13 +38,12 @@ class squirrelGUI(QDialog):
     self.rmButt.setIcon(QIcon("minus.png"))
     
     #disable buttons
-    self.relButt.setEnabled(False)
     self.rmButt.setEnabled(False)
 
     
     #tooltips
     self.addButt.setToolTip(u"Dodaj do listy nowy kanał RSS")
-    self.relButt.setToolTip(u"Odśwież zaznaczony kanał")
+    self.relButt.setToolTip(u"Zaktualizuj kanały RSS")
     self.rmButt.setToolTip(u"Usuń z listy kanał RSS")
     self.fromFileButt.setToolTip(u"Załaduj z pliku kanał RSS")
     
@@ -98,6 +97,7 @@ class rss_squirrel(squirrelGUI):
     self.feedList.itemActivated.connect(self.readExistFeed)
     
     self.connect(self.addButt, SIGNAL("clicked()"), self.addFeed)
+    self.connect(self.relButt, SIGNAL("clicked()"), self.updateFeeds)
     self.connect(self.rmButt, SIGNAL("clicked()"), self.rmFeed)
     
     
@@ -126,7 +126,6 @@ class rss_squirrel(squirrelGUI):
     self.readFeed("feeds/"+lower(str(FList.text())).replace(" ", "")+".rss") #FList -> arg wysył z self.lista.itemActivated.connect(self.openfeed)
 
     #enabling buttons
-    self.relButt.setEnabled(True)
     self.rmButt.setEnabled(True)
     
     
@@ -145,7 +144,16 @@ class rss_squirrel(squirrelGUI):
     
     self.feedList.clear();
     for i in feedr().flist: self.feedList.addItem(i);  #feedr() <-> feed_ruler
-    
+  
+  def updateFeeds(self):
+    for obj in feedr().flist:
+      
+      source = urllib.urlopen(feedr().flist[obj]);
+      target = open(u"feeds/"+lower(obj).replace(" ", "")+".rss", "w")
+      target.write(source.read())
+      target.close()
+      
+      
   def rmFeed(self):
     remove("feeds/"+lower(str(self.feedList.selectedItems()[0].text()).replace(" ", ""))+".rss");
     feedr().feed_rm(str(self.feedList.selectedItems()[0].text()));
