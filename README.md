@@ -13,7 +13,7 @@ prosty agragator rss
 
 #### beta 1:
 - nowa strona główna programu
-- zmiana nazw na język angielski
+- zmiana nazw na język angielski [zrobione]
 - uporządkowanie kodu i doprowadzenie do końcowej postaci
 - poprawki obsługi unicode
 - poprawki ze znakami specjalnymi w tytułach

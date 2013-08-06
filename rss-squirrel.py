@@ -139,7 +139,7 @@ class rss_squirrel(squirrelGUI):
     element = pop_ups.manage()
     if (element.adres.text()):
       source = urllib.urlopen(str(element.adres.text()));  #element adres z pop_pups
-      target = open(u"feeds/"+lower(str(element.nazw.text())).replace(" ", "")+".rss", "w") #nazw - pop_ups
+      target = open(u"feeds/"+lower(str(element.label.text())).replace(" ", "")+".rss", "w") #nazw - pop_ups
       target.write(source.read())
       target.close()
       
@@ -147,7 +147,7 @@ class rss_squirrel(squirrelGUI):
       i = 0; stop = False;
       for j in feedr().flist: 
 	self.feedList.addItem(j);        #feedr() <-> feed_ruler
-	if (stop == False and j != element.nazw.text()): 
+	if (stop == False and j != element.label.text()): 
 	  i += 1
 	else: stop = True
 	

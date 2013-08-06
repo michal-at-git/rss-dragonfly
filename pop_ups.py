@@ -19,10 +19,10 @@ class manage(QDialog):
         core.addLayout(ch3)
 
         
-        self.nazw = QLineEdit();
+        self.label = QLineEdit();
 	self.adres = QLineEdit();
         
-        labnaz = QLabel("Nazwa: ");
+        lablab = QLabel("Nazwa: ");
         labadr = QLabel("Adres: ");
         
         self.add = QPushButton("Dodaj");
@@ -32,12 +32,12 @@ class manage(QDialog):
         self.cancel.setFixedWidth(90)
         
         labadr.setFixedWidth(60)
-        labnaz.setFixedWidth(60)
-	self.nazw.setFixedWidth(200)
+        lablab.setFixedWidth(60)
+	self.label.setFixedWidth(200)
         self.adres.setFixedWidth(200)
         
-        ch1.addWidget(labnaz)
-        ch1.addWidget(self.nazw)
+        ch1.addWidget(lablab)
+        ch1.addWidget(self.label)
         
         ch2.addWidget(labadr)
         ch2.addWidget(self.adres)
@@ -47,17 +47,16 @@ class manage(QDialog):
 	self.setLayout(core)
 	self.setWindowTitle(u"Dodaj nowy kanał RSS");
         self.setWindowIcon(QIcon('ikonka.png'))
-	self.connect(self.add, SIGNAL("clicked()"), self.dodaj)
+	self.connect(self.add, SIGNAL("clicked()"), self.addFeed)
 	self.connect(self.cancel, SIGNAL("clicked()"), self.close)
 
 	self.exec_()
 
 
-    def dodaj(self):
+    def addFeed(self):
 	test = feedr();
-	test.feed_add(str(unicode(self.nazw.text())), str(self.adres.text()))
+	test.feed_add(str(unicode(self.label.text())), str(self.adres.text()))
 
 	#c.feed_add("...", "http://")
 	self.close();
 	return True
-	
