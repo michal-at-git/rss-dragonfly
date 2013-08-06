@@ -18,8 +18,6 @@ prosty agragator rss
 - poprawki obsługi unicode
 - poprawki ze znakami specjalnymi w tytułach
 - poprawki z niepoprawnymi adresami
-- przygotowanie instalatora linuksowego w bashu
-######(lista w opracowaniu...)
 
 #### rc
 w opracowaniu
