@@ -8,6 +8,13 @@ import sys
 from feedparser import *
 
 
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
+
+
+
 from feed_ruler import *
 import pop_ups
 from string import lower
@@ -89,7 +96,7 @@ class rss_squirrel(squirrelGUI):
   def __init__(self, parent=None):
     super(rss_squirrel, self).__init__(parent)
     self.init()
-    self.rssContentView.setText("<h1>Witaj w RSS Squirrel!!!</h1>");
+    self.rssContentView.setText("<h1>Witaj w RSS Squirrel!!!</h1><p>Wersja programu: 1.0</p>");
     
     self.connect(self.goButt, SIGNAL("clicked()"), self.readFeed)
     self.connect(self.fromFileButt, SIGNAL("clicked()"), self.fromFile)
@@ -103,27 +110,27 @@ class rss_squirrel(squirrelGUI):
     
     
   def readFeed(self, link=None):
-    try:
-      if (link == None):
-	x = nut(self.addr.text());
-      else: x=nut(link);
-      self.rssContentView.setText("<h1>"+x.frss.feed.title+"</h1>");
-      i = 0;
-      self.setWindowTitle(x.frss.feed.title+" | RSS Squirrel")
+    #try:
+    if (link == None):
+      x = nut(self.addr.text());
+    else: x=nut(link);
+    self.rssContentView.setText("<h1>"+x.frss.feed.title+"</h1>");
+    i = 0;
+    self.setWindowTitle(x.frss.feed.title+" | RSS Squirrel")
       
-      for n in x.frss.entries:
-	self.rssContentView.append("<h2>"+x.frss.entries[i].title+"</h2>");
-	self.rssContentView.append("<i>"+x.frss.entries[i].published+"</i>");
-	self.rssContentView.append(x.frss.entries[i].description);
-	i += 1
+    for n in x.frss.entries:
+      self.rssContentView.append("<h2>"+x.frss.entries[i].title+"</h2>");
+      self.rssContentView.append("<i>"+x.frss.entries[i].published+"</i>");
+      self.rssContentView.append(x.frss.entries[i].description);
+      i += 1
 	
-    except:
-      self.rssContentView.setText("<h1>"+u'Nie można załadować kanału rss'+"</h1>")
-      self.setWindowTitle(u"Nie można załadować kanału rss | RSS Squirrel")
+    #except:
+      #self.rssContentView.setText("<h1>"+u'Nie można załadować kanału rss'+"</h1>")
+      #self.setWindowTitle(u"Nie można załadować kanału rss | RSS Squirrel")
       
       
   def readExistFeed(self, FList):
-    self.readFeed("feeds/"+lower(str(FList.text())).replace(" ", "")+".rss") #FList -> arg wysył z self.lista.itemActivated.connect(self.openfeed)
+    self.readFeed(r"feeds/"+lower(str(FList.text().toUtf8())).replace(" ", "")+".rss") #FList -> arg wysył z self.lista.itemActivated.connect(self.openfeed)
 
     #enabling buttons
     self.rmButt.setEnabled(True)
@@ -139,7 +146,7 @@ class rss_squirrel(squirrelGUI):
     element = pop_ups.manage()
     if (element.adres.text()):
       source = urllib.urlopen(str(element.adres.text()));  #element adres z pop_pups
-      target = open(u"feeds/"+lower(str(element.label.text())).replace(" ", "")+".rss", "w") #nazw - pop_ups
+      target = open(r"feeds/"+lower(str(element.label.text().toUtf8())).replace(" ", "")+".rss", "w".decode('utf-8')) #nazw - pop_ups
       target.write(source.read())
       target.close()
       
@@ -147,7 +154,7 @@ class rss_squirrel(squirrelGUI):
       i = 0; stop = False;
       for j in feedr().flist: 
 	self.feedList.addItem(j);        #feedr() <-> feed_ruler
-	if (stop == False and j != element.label.text()): 
+	if (stop == False and str(j).encode('Utf-8') != str(element.label.text()).encode('Utf-8')): 
 	  i += 1
 	else: stop = True
 	
@@ -159,7 +166,7 @@ class rss_squirrel(squirrelGUI):
     for obj in feedr().flist:
       
       source = urllib.urlopen(feedr().flist[obj]);
-      target = open(u"feeds/"+lower(obj).replace(" ", "")+".rss", "w")
+      target = open(r"feeds/"+lower(obj).replace(" ", "")+".rss", "w")
       target.write(source.read())
       target.close()
       

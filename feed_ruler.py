@@ -2,6 +2,11 @@
 #-*- coding: utf-8 -*-
 
 
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
+
 from xml.dom import minidom
 #from os import *
 import re
@@ -21,12 +26,12 @@ class feedr():
       
     except:
       x = open("feeds.xml", "w");
-      x.write('<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<feedlist>\n</feedlist>');
+      x.write(u'<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<feedlist>\n</feedlist>');
       x.close();
     #finally:
       #x.close();
   def feed_add(self, name, addr):
-    if re.compile(u"^[a-ząćęłśźż ]+[a-ząćęłśźż ]$").match(lower(name)):
+    if re.compile("^[0-9a-ząćęłśźż ]+[0-9a-ząćęłśźż ]$").match(lower(name)):
       update = self.feeds[0].toxml("utf-8");
       update = """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
       """+update[0:len(update)-11]+"""  <feed>
@@ -56,5 +61,5 @@ class feedr():
     self.li = []
     for i in listdir("feeds/"):
 	  
-	  if (re.compile("\w+.xml$").match(i)): self.li.append(i)
+	  if (re.compile(u"\w+.xml$").match(i)): self.li.append(i)
 	

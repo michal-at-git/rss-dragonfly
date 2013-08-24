@@ -1,5 +1,11 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
+#gąska
+
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
@@ -55,7 +61,7 @@ class manage(QDialog):
 
     def addFeed(self):
 	test = feedr();
-	test.feed_add(str(unicode(self.label.text())), str(self.adres.text()))
+	test.feed_add(str(self.label.text().toUtf8()), str(self.adres.text()))
 
 	#c.feed_add("...", "http://")
 	self.close();
