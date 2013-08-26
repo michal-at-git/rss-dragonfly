@@ -29,7 +29,7 @@ class nut:
 
    
     
-class dragonflyGUI(QDialog):
+class squirrelGUI(QDialog):
  def init(self):
     self.rssContentView = QTextBrowser();
     self.addr = QLineEdit();
@@ -92,9 +92,9 @@ class dragonflyGUI(QDialog):
     self.setWindowIcon(QIcon('ikonka.png'));
     self.setWindowTitle("RSS Squirrel")
     
-class rss_dragonfly(dragonflyGUI):
+class rss_squirrel(squirrelGUI):
   def __init__(self, parent=None):
-    super(rss_dragonfly, self).__init__(parent)
+    super(rss_squirrel, self).__init__(parent)
     self.init()
     self.rssContentView.setText("<h1>Witaj w RSS Squirrel!!!</h1><p>Wersja programu: 1.0</p>");
     
@@ -185,6 +185,6 @@ class rss_dragonfly(dragonflyGUI):
     
 
 rsssq = QApplication(sys.argv)
-rss_sq = rss_dragonfly() 
+rss_sq = rss_squirrel() #rss_sq = _rss_squirrel() #można przełączyć na tryb testowy
 rss_sq.show()
 rsssq.exec_()
