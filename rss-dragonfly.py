@@ -29,7 +29,7 @@ class nut:
 
    
     
-class squirrelGUI(QDialog):
+class dragonflyGUI(QDialog):
  def init(self):
     self.rssContentView = QTextBrowser();
     self.addr = QLineEdit();
@@ -90,13 +90,13 @@ class squirrelGUI(QDialog):
     self.setLayout(mainLayout);
     self.setGeometry(400, 180, 600,500);
     self.setWindowIcon(QIcon('ikonka.png'));
-    self.setWindowTitle("RSS Squirrel")
+    self.setWindowTitle("RSS Dragonfly")
     
-class rss_squirrel(squirrelGUI):
+class rss_dragonfly(dragonflyGUI):
   def __init__(self, parent=None):
-    super(rss_squirrel, self).__init__(parent)
+    super(rss_dragonfly, self).__init__(parent)
     self.init()
-    self.rssContentView.setText("<h1>Witaj w RSS Squirrel!!!</h1><p>Wersja programu: 1.0</p>");
+    self.rssContentView.setText("<h1>Witaj w RSS Dragonfly!!!</h1><p>Wersja programu: 1.0</p>");
     
     self.connect(self.goButt, SIGNAL("clicked()"), self.readFeed)
     self.connect(self.fromFileButt, SIGNAL("clicked()"), self.fromFile)
@@ -116,7 +116,7 @@ class rss_squirrel(squirrelGUI):
     else: x=nut(link);
     self.rssContentView.setText("<h1>"+x.frss.feed.title+"</h1>");
     i = 0;
-    self.setWindowTitle(x.frss.feed.title+" | RSS Squirrel")
+    self.setWindowTitle(x.frss.feed.title+" | RSS Dragonfly")
       
     for n in x.frss.entries:
       self.rssContentView.append("<h2>"+x.frss.entries[i].title+"</h2>");
@@ -126,7 +126,7 @@ class rss_squirrel(squirrelGUI):
 	
     #except:
       #self.rssContentView.setText("<h1>"+u'Nie można załadować kanału rss'+"</h1>")
-      #self.setWindowTitle(u"Nie można załadować kanału rss | RSS Squirrel")
+      #self.setWindowTitle(u"Nie można załadować kanału rss | RSS Dragonfly")
       
       
   def readExistFeed(self, FList):
@@ -185,6 +185,6 @@ class rss_squirrel(squirrelGUI):
     
 
 rsssq = QApplication(sys.argv)
-rss_sq = rss_squirrel() #rss_sq = _rss_squirrel() #można przełączyć na tryb testowy
+rss_sq = rss_dragonfly() 
 rss_sq.show()
 rsssq.exec_()
