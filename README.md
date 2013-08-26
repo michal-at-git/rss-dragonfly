@@ -1,4 +1,4 @@
-##RSS Squirrel
+##RSS Dragonfly
 prosty agragator rss
 
 ###do zrobienia:
@@ -12,11 +12,11 @@ prosty agragator rss
 
 
 #### beta 1:
-- nowa strona główna programu
+- nowa strona główna programu [zrobione]
 - zmiana nazw na język angielski [zrobione]
-- uporządkowanie kodu i doprowadzenie do końcowej postaci
-- poprawki obsługi unicode
-- poprawki ze znakami specjalnymi w tytułach
+- uporządkowanie kodu i doprowadzenie do końcowej postaci [zrobione]
+- poprawki obsługi unicode [zrobione]
+- poprawki ze znakami specjalnymi w tytułach [zrobione]
 - poprawki z niepoprawnymi adresami
 
 #### rc
