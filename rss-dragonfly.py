@@ -113,17 +113,17 @@ class rss_dragonfly(dragonflyGUI):
     try:
       if (link == None):
 	x = nut(self.addr.text());
-    else: x=nut(link);
+      else: x=nut(link);
       self.rssContentView.setText("<h1>"+x.frss.feed.title+"</h1>");
       i = 0;
       self.setWindowTitle(x.frss.feed.title+" | RSS Dragonfly")
-	
+	  
       for n in x.frss.entries:
 	self.rssContentView.append("<h2>"+x.frss.entries[i].title+"</h2>");
 	self.rssContentView.append("<i>"+x.frss.entries[i].published+"</i>");
 	self.rssContentView.append(x.frss.entries[i].description);
 	i += 1
-	
+	  
     except:
       self.rssContentView.setText("<h1>"+u'Nie można załadować kanału rss'+"</h1>")
       self.setWindowTitle(u"Nie można załadować kanału rss | RSS Dragonfly")
