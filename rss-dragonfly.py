@@ -145,22 +145,25 @@ class rss_dragonfly(dragonflyGUI):
   def addFeed(self):
     element = pop_ups.manage()
     if (element.adres.text()):
-      source = urllib.urlopen(str(element.adres.text()));  #element adres z pop_pups
-      target = open(r"feeds/"+lower(str(element.label.text().toUtf8())).replace(" ", "")+".rss", "w".decode('utf-8')) #nazw - pop_ups
-      target.write(source.read())
-      target.close()
-      
-      self.feedList.clear();
-      i = 0; stop = False;
-      for j in feedr().flist: 
-	self.feedList.addItem(j);        #feedr() <-> feed_ruler
-	if (stop == False and str(j).encode('Utf-8') != str(element.label.text()).encode('Utf-8')): 
-	  i += 1
-	else: stop = True
+      try:
+	source = urllib.urlopen(str(element.adres.text()));  #element adres z pop_pups
+	target = open(r"feeds/"+lower(str(element.label.text().toUtf8())).replace(" ", "")+".rss", "w".decode('utf-8')) #nazw - pop_ups
+	target.write(source.read())
+	target.close()
 	
-      self.feedList.item(i).setSelected(True);
-      self.readExistFeed(self.feedList.selectedItems()[0])
-      self.rmButt.setEnabled(True)
+	self.feedList.clear();
+	i = 0; stop = False;
+	for j in feedr().flist: 
+	  self.feedList.addItem(j);        #feedr() <-> feed_ruler
+	  if (stop == False and str(j).encode('Utf-8') != str(element.label.text()).encode('Utf-8')): 
+	    i += 1
+	  else: stop = True
+	  
+	self.feedList.item(i).setSelected(True);
+	self.readExistFeed(self.feedList.selectedItems()[0])
+	self.rmButt.setEnabled(True)
+      except:
+	None
 
   def updateFeeds(self):
     for obj in feedr().flist:
