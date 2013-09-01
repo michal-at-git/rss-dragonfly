@@ -2,9 +2,9 @@
 #-*- coding: utf-8 -*-
 
 
-import sys
-reload(sys)
-sys.setdefaultencoding("utf-8")
+#import sys
+#reload(sys)
+#sys.setdefaultencoding("utf-8")
 
 
 from xml.dom import minidom
@@ -43,8 +43,9 @@ class feedr():
       feedlistfile.write(update);
       feedlistfile.close()
       #name+".xml"
-    
+      
   def feed_rm(self,name):
+    print name
     x = open("feeds.xml", "r")
     txt = x.read();
     rm = """<feed>

@@ -110,27 +110,27 @@ class rss_dragonfly(dragonflyGUI):
     
     
   def readFeed(self, link=None):
-    #try:
-    if (link == None):
-      x = nut(self.addr.text());
+    try:
+      if (link == None):
+	x = nut(self.addr.text());
     else: x=nut(link);
-    self.rssContentView.setText("<h1>"+x.frss.feed.title+"</h1>");
-    i = 0;
-    self.setWindowTitle(x.frss.feed.title+" | RSS Dragonfly")
-      
-    for n in x.frss.entries:
-      self.rssContentView.append("<h2>"+x.frss.entries[i].title+"</h2>");
-      self.rssContentView.append("<i>"+x.frss.entries[i].published+"</i>");
-      self.rssContentView.append(x.frss.entries[i].description);
-      i += 1
+      self.rssContentView.setText("<h1>"+x.frss.feed.title+"</h1>");
+      i = 0;
+      self.setWindowTitle(x.frss.feed.title+" | RSS Dragonfly")
 	
-    #except:
-      #self.rssContentView.setText("<h1>"+u'Nie można załadować kanału rss'+"</h1>")
-      #self.setWindowTitle(u"Nie można załadować kanału rss | RSS Dragonfly")
+      for n in x.frss.entries:
+	self.rssContentView.append("<h2>"+x.frss.entries[i].title+"</h2>");
+	self.rssContentView.append("<i>"+x.frss.entries[i].published+"</i>");
+	self.rssContentView.append(x.frss.entries[i].description);
+	i += 1
+	
+    except:
+      self.rssContentView.setText("<h1>"+u'Nie można załadować kanału rss'+"</h1>")
+      self.setWindowTitle(u"Nie można załadować kanału rss | RSS Dragonfly")
       
       
   def readExistFeed(self, FList):
-    self.readFeed(r"feeds/"+lower(str(FList.text().toUtf8())).replace(" ", "")+".rss") #FList -> arg wysył z self.lista.itemActivated.connect(self.openfeed)
+    self.readFeed(r"feeds/"+lower(str(FList.text()).encode('Utf-8')).replace(" ", "")+".rss") #FList -> arg wysył z self.lista.itemActivated.connect(self.openfeed)
 
     #enabling buttons
     self.rmButt.setEnabled(True)
