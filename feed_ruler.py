@@ -12,6 +12,7 @@ from xml.dom import minidom
 import re
 import urllib
 from string import lower
+
 class feedr():
   def __init__(self):
     
@@ -37,9 +38,9 @@ class feedr():
       if re.compile("^[0-9a-ząćęłśźż ]+[0-9a-ząćęłśźż ]$").match(lower(name)):
 	update = self.feeds[0].toxml("utf-8");
 	update = """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-	"""+update[0:len(update)-11]+"""  <feed>
-	<addr>"""+addr+"""</addr>
-	<name>"""+name+"""</name>
+	"""+update[0:len(update)-11]+"""    <feed>
+      <addr>"""+addr+"""</addr>
+      <name>"""+name+"""</name>
     </feed>
   </feedlist>""";
 	feedlistfile = open('feeds.xml', 'w')
@@ -49,14 +50,16 @@ class feedr():
     except: None
       
   def feed_rm(self,name):
-    print name
     x = open("feeds.xml", "r")
     txt = x.read();
-    rm = """<feed>
+    rm = """    <feed>
       <addr>"""+self.flist[name]+"""</addr>
       <name>"""+name+"""</name>
-  </feed>"""
+    </feed>"""
+    print rm #DEBUG
     txt = txt.replace(rm, "");
+    print "\n********\n",txt #DEBUG
+
     x.close();
     x = open("feeds.xml", "w")
     x.write(txt);

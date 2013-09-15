@@ -26,7 +26,9 @@ class nut:
     
     self.addr = addr
     self.frss = parse(str(self.addr))  
-
+    
+    #debugs:
+    print self.addr;
    
     
 class dragonflyGUI(QDialog):
@@ -130,8 +132,8 @@ class rss_dragonfly(dragonflyGUI):
       
       
   def readExistFeed(self, FList):
-    self.readFeed(r"feeds/"+lower(str(FList.text()).encode('Utf-8')).replace(" ", "")+".rss") #FList -> arg wysył z self.lista.itemActivated.connect(self.openfeed)
-
+    self.readFeed(r"feeds/"+lower(str(FList.text()).encode('Utf-8')).replace(" ", "_")+".rss") #FList -> arg wysył z self.lista.itemActivated.connect(self.openfeed)
+    print "feeds/"+lower(str(FList.text()).encode('Utf-8')).replace(" ", "_")+".rss"; #DEBUG!!!
     #enabling buttons
     self.rmButt.setEnabled(True)
     
@@ -145,37 +147,37 @@ class rss_dragonfly(dragonflyGUI):
   def addFeed(self):
     element = pop_ups.manage()
     if (element.adres.text()):
-      try:
-	source = urllib.urlopen(str(element.adres.text()));  #element adres z pop_pups
-	target = open(r"feeds/"+lower(str(element.label.text().toUtf8())).replace(" ", "")+".rss", "w".decode('utf-8')) #nazw - pop_ups
-	target.write(source.read())
-	target.close()
+      #try:
+      source = urllib.urlopen(str(element.adres.text()));  #element adres z pop_pups
+      target = open(r"feeds/"+lower(str(element.label.text().toUtf8())).replace(" ", "_")+".rss", "w".decode('utf-8')) #nazw - pop_ups
+      target.write(source.read())
+      target.close()
 	
-	self.feedList.clear();
-	i = 0; stop = False;
-	for j in feedr().flist: 
-	  self.feedList.addItem(j);        #feedr() <-> feed_ruler
-	  if (stop == False and str(j).encode('Utf-8') != str(element.label.text()).encode('Utf-8')): 
-	    i += 1
-	  else: stop = True
+      self.feedList.clear();
+      i = 0; stop = False;
+      for j in feedr().flist: 
+	self.feedList.addItem(j);        #feedr() <-> feed_ruler
+	if (stop == False and str(j).encode('Utf-8') != str(element.label.text()).encode('Utf-8')): 
+	  i += 1
+	else: stop = True
 	  
-	self.feedList.item(i).setSelected(True);
-	self.readExistFeed(self.feedList.selectedItems()[0])
-	self.rmButt.setEnabled(True)
-      except:
-	None
+      self.feedList.item(i).setSelected(True);
+      self.readExistFeed(self.feedList.selectedItems()[0])
+      self.rmButt.setEnabled(True)
+      #except:
+	#None
 
   def updateFeeds(self):
     for obj in feedr().flist:
       
       source = urllib.urlopen(feedr().flist[obj]);
-      target = open(r"feeds/"+lower(obj).replace(" ", "")+".rss", "w")
+      target = open(r"feeds/"+lower(obj).replace(" ", "_")+".rss", "w")
       target.write(source.read())
       target.close()
       
       
   def rmFeed(self):
-    remove("feeds/"+lower(str(self.feedList.selectedItems()[0].text()).replace(" ", ""))+".rss");
+    remove("feeds/"+lower(str(self.feedList.selectedItems()[0].text()).replace(" ", "_"))+".rss");
     feedr().feed_rm(str(self.feedList.selectedItems()[0].text()));
     
     self.feedList.clear()
