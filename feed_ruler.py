@@ -52,14 +52,11 @@ class feedr():
   def feed_rm(self,name):
     x = open("feeds.xml", "r")
     txt = x.read();
-    print "RMRMR>",name #DEBUG
     rm = """    <feed>
       <addr>"""+self.flist[u""+str(name).encode('Utf-8')]+"""</addr>
       <name>"""+name+"""</name>
     </feed>"""
-    print rm #DEBUG
     txt = txt.replace(rm, "");
-    print "\n********\n",txt #DEBUG
 
     x.close();
     x = open("feeds.xml", "w")

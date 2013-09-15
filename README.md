@@ -1,13 +1,3 @@
 ##RSS Dragonfly
-prosty agragator rss
-
-###do zrobienia:
-
-#### rc
-znane błędy:
--kodowanie
--kodowanie
--kodowanie
--kodowanie 
--kodowanie... ;/
-### koniec! ;)
+[PL] prosty agragator rss
+[EN] simple RSS agregator
