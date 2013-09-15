@@ -35,7 +35,7 @@ class feedr():
   def feed_add(self, name, addr):
     try:
       urllib.urlopen(addr)
-      if re.compile("^[0-9a-ząćęłśźż ]+[0-9a-ząćęłśźż ]$").match(lower(name)):
+      if re.compile("^[0-9a-ząćęłŁśźż\- ]+[0-9a-ząćęłśźż\- ]$").match(lower(name)):
 	update = self.feeds[0].toxml("utf-8");
 	update = """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 	"""+update[0:len(update)-11]+"""    <feed>
@@ -52,8 +52,9 @@ class feedr():
   def feed_rm(self,name):
     x = open("feeds.xml", "r")
     txt = x.read();
+    print "RMRMR>",name #DEBUG
     rm = """    <feed>
-      <addr>"""+self.flist[name]+"""</addr>
+      <addr>"""+self.flist[u""+str(name).encode('Utf-8')]+"""</addr>
       <name>"""+name+"""</name>
     </feed>"""
     print rm #DEBUG

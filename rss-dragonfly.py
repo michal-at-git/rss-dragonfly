@@ -49,6 +49,8 @@ class dragonflyGUI(QDialog):
     #disable buttons
     self.rmButt.setEnabled(False)
 
+    #default
+    self.goButt.setDefault(True);
     
     #tooltips
     self.addButt.setToolTip(u"Dodaj do listy nowy kanał RSS")
@@ -136,7 +138,7 @@ class rss_dragonfly(dragonflyGUI):
     print "feeds/"+lower(str(FList.text()).encode('Utf-8')).replace(" ", "_")+".rss"; #DEBUG!!!
     #enabling buttons
     self.rmButt.setEnabled(True)
-    
+    print FList.text() #DEBUG
     
     
   def fromFile(self):
@@ -177,9 +179,11 @@ class rss_dragonfly(dragonflyGUI):
       
       
   def rmFeed(self):
-    remove("feeds/"+lower(str(self.feedList.selectedItems()[0].text()).replace(" ", "_"))+".rss");
-    feedr().feed_rm(str(self.feedList.selectedItems()[0].text()));
     
+    print ":::::::",str(self.feedList.selectedItems()[0].text()) #DEBUG
+
+    remove(r"feeds/"+lower(str(self.feedList.selectedItems()[0].text()).encode('Utf-8')).replace(" ", "_")+".rss");
+    feedr().feed_rm(r""+str(self.feedList.selectedItems()[0].text()).encode('Utf-8'));
     self.feedList.clear()
     
     for i in feedr().flist: self.feedList.addItem(i);
