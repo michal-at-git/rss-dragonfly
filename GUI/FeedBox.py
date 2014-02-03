@@ -6,7 +6,7 @@ reload(sys);
 sys.setdefaultencoding("utf-8");
 
 
-class feedBox(object):
+class FeedBox(object):
   global css
   css = """
       body, html {margin: 0px;

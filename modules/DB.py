@@ -3,7 +3,7 @@
 
 import sqlite3 as sqlite
 
-class db:
+class DB:
   def __init__(self):
     self.dbHandle = sqlite.connect('dragonfly.db');
     with self.dbHandle:

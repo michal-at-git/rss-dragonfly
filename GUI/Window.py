@@ -10,13 +10,13 @@ __name__ = 'window';
 from PyQt4.QtGui import *;
 from PyQt4.QtCore import *;
 from PyQt4.QtWebKit import *
-import feedBox;
+import FeedBox;
 
 import sys;
 reload(sys);
 sys.setdefaultencoding("utf-8");
 
-class window(QWidget):
+class Window(QWidget):
   
   
   def drawWindow(self):  
@@ -110,7 +110,7 @@ class window(QWidget):
     self.setGeometry(400, 180, 700,500);
     self.setWindowIcon(QIcon('GUI/ikonka.png'));
     self.setWindowTitle("RSS Dragonfly");
-    self.rssContentView.setHtml(unicode(feedBox.feedBox.start()));
+    self.rssContentView.setHtml(unicode(FeedBox.FeedBox.start()));
     
     self.setMinimumWidth(600);
     self.setMinimumHeight(400);

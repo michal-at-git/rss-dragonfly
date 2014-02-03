@@ -9,7 +9,7 @@ sys.setdefaultencoding("utf-8")
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-class addFeedDialog(QDialog):
+class AddFeedDialog(QDialog):
   def __init__(self, parent=None):
     super(addFeedDialog, self).__init__(parent);
   

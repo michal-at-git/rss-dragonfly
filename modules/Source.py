@@ -5,7 +5,7 @@ import pycurl;
 import cStringIO;
 
 
-class source:
+class Source:
   def __init__(self, url):
     try:
       self.url = url;

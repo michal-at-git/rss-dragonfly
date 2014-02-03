@@ -4,8 +4,7 @@
 import feedparser;
 import StringIO;
 import img;
-from db import *;
-from source import source;
+from Source import Source;
 
 class feed:
   def __init__(self, url, name = False):
@@ -20,7 +19,7 @@ class feed:
 
   def generate(self):
     
-    handle = source(self.url); 
+    handle = Source(self.url); 
     self.src = handle.getSource();
     
     try:
@@ -62,15 +61,20 @@ class feed:
 
       
   def add(self):
-    from db import db;
+    0
+    ##!!! DEPR
     
-    if(len(self.url) > 0 and len(self.name)>0):
-      query = "insert into feedList(name, addr) values ('"+self.name+"', '"+self.url+"');";
+    
+    
+    #from db import db;
+    
+    #if(len(self.url) > 0 and len(self.name)>0):
+      #query = "insert into feedList(name, addr) values ('"+self.name+"', '"+self.url+"');";
 
-      try:
-	database = db();
-	database.send(query);
+      #try:
+	#database = db();
+	#database.send(query);
 	
-      except:
-	print "adding feed into database failed"
+      #except:
+	#print "adding feed into database failed"
       

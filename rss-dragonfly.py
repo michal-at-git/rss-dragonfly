@@ -17,15 +17,14 @@ sys.setdefaultencoding("utf-8");
 
 
 sys.path.append('GUI/');
-from window import *;
-from addFeedDialog import *;
+from Window import *;
+from AddFeedDialog import *;
 
 sys.path.append('modules/');
-from feed_ruler import *
-import feedBox;
-from feed import feed;
-from feedList import feedList;
-from db import db;
+import FeedBox;
+from Feed import Feed;
+from FeedList import FeedList;
+from DB import DB;
 
 import pop_ups
 from string import lower
@@ -35,15 +34,15 @@ from os import remove
 
 
     
-class rss_dragonfly(window):
+class rss_dragonfly(Window):
   def __init__(self, parent=None):
     super(rss_dragonfly, self).__init__(parent);
     self.drawWindow();
     
-    self.dbHandle = db();
+    self.dbHandle = DB();
     
-    self.feed_list = feedList(self.feedListWidget, self.dbHandle);
-    self.addFeedPopup = addFeedDialog();
+    self.feedList = FeedList(self.feedListWidget, self.dbHandle);
+    self.addFeedPopup = AddFeedDialog();
     
 
 
@@ -76,12 +75,12 @@ class rss_dragonfly(window):
     if len(self.addressInput.text()) > 1:
       feedsrc = feed(self.addressInput.text());
       feedsrc.generate();
-      self.rssContentView.setHtml(unicode(feedBox.feedBox.showFeeds(feedsrc.h1, feedsrc.content)));
+      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feedsrc.h1, feedsrc.content)));
       self.updateTitle(feedsrc.h1);
       
       
   def addFeed(self):
-    newFeed = feed(str(self.addFeedPopup.address.text()), str(self.addFeedPopup.name.text()));
+    newFeed = Feed(str(self.addFeedPopup.address.text()), str(self.addFeedPopup.name.text()));
     newFeed.add();
     self.addFeedPopup.close();
   def rmFeed(self):

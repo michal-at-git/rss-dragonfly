@@ -3,7 +3,7 @@
 
 from PyQt4.QtGui import *
 
-class feedList(QWidget):
+class FeedList(QWidget):
   def __init__(self, feedListWidget, dbHandle):
     self.feedListWidget = feedListWidget;
     self.dbHandle = dbHandle;
