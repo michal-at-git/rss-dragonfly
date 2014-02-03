@@ -44,3 +44,5 @@ class addFeedDialog(QDialog):
     self.setLayout(mainLayout);
     self.setWindowTitle(u"Dodaj nowy kanał RSS");
     self.setGeometry(400, 180, 350,80);
+    self.setMaximumWidth(500);
+    self.setMaximumHeight(100);

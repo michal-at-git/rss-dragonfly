@@ -67,6 +67,7 @@ class rss_dragonfly(window):
     
     #popUp signals:
     self.connect(self.addFeedPopup.send, SIGNAL("clicked()"), self.addFeed);
+    self.connect(self.addFeedPopup.cancel, SIGNAL("clicked()"), self.addFeedPopup.close);
 
     
     
