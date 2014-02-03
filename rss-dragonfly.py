@@ -26,7 +26,6 @@ from Feed import Feed;
 from FeedList import FeedList;
 from DB import DB;
 
-import pop_ups
 from string import lower
 import urllib
 from os import remove
@@ -73,7 +72,7 @@ class rss_dragonfly(Window):
     
   def readFeed(self):
     if len(self.addressInput.text()) > 1:
-      feedsrc = feed(self.addressInput.text());
+      feedsrc = Feed(self.addressInput.text());
       feedsrc.generate();
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feedsrc.h1, feedsrc.content)));
       self.updateTitle(feedsrc.h1);

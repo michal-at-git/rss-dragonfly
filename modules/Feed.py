@@ -6,7 +6,7 @@ import StringIO;
 import img;
 from Source import Source;
 
-class feed:
+class Feed:
   def __init__(self, url, name = False):
     
     

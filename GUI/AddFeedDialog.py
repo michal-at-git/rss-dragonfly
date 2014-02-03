@@ -11,7 +11,7 @@ from PyQt4.QtCore import *
 
 class AddFeedDialog(QDialog):
   def __init__(self, parent=None):
-    super(addFeedDialog, self).__init__(parent);
+    super(AddFeedDialog, self).__init__(parent);
   
 
     self.name = QLineEdit();
