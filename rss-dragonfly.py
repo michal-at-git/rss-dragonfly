@@ -24,11 +24,15 @@ sys.path.append('modules/');
 from feed_ruler import *
 import feedBox;
 from feed import feed;
+from feedList import feedList;
+from db import db;
 
 import pop_ups
 from string import lower
 import urllib
 from os import remove
+
+
 
     
 class rss_dragonfly(window):
@@ -36,7 +40,11 @@ class rss_dragonfly(window):
     super(rss_dragonfly, self).__init__(parent);
     self.drawWindow();
     
+    self.dbHandle = db();
+    
+    self.feed_list = feedList(self.feedListWidget, self.dbHandle);
     self.addFeedPopup = addFeedDialog();
+    
 
 
     
@@ -46,8 +54,13 @@ class rss_dragonfly(window):
     #	self.feedList.itemActivated.connect(self.readExistFeed)
     
     self.connect(self.addNewFeedButton, SIGNAL("clicked()"), self.addFeedPopup.exec_)
+   
+
+    self.feedListWidget.itemActivated.connect(self.feedSelected);
+
     #	self.connect(self.reloadFeedsButton, SIGNAL("clicked()"), self.updateFeeds)
-    #	self.connect(self.rmFeedButton, SIGNAL("clicked()"), self.rmFeed)
+    self.rmFeedButton.setEnabled(False);
+    self.connect(self.rmFeedButton, SIGNAL("clicked()"), self.rmFeed)
 
     
     #popUp
@@ -70,10 +83,17 @@ class rss_dragonfly(window):
     newFeed = feed(str(self.addFeedPopup.address.text()), str(self.addFeedPopup.name.text()));
     newFeed.add();
     self.addFeedPopup.close();
+  def rmFeed(self):
+    #self.feed_list.rmItem(selected.item());
+    print self.feedListWidget.currentItem().text();
     
   def quit(self):
     rsssq.quit();
     
+  def feedSelected(self,selected):
+
+    print "opening feeds.. :)"
+    self.rmFeedButton.setEnabled(True);
 
     
 

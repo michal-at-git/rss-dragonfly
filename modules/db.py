@@ -14,8 +14,8 @@ class db:
   def send(self, query):
     self.cursor.execute(query);
       
-  def getFeedList(self, query):
-    self.cursor.execute(query);
+  def getFeedList(self):
+    self.cursor.execute('select * from feedList');
     raw = self.cursor.fetchall();
     
     i=0

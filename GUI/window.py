@@ -42,12 +42,12 @@ class window(QWidget):
     #self.status = QString(u'<div style=\"margin-left: 300%; color: blue;\">załadowano</div>');
     self.statusDisplay = QLabel(u'załadowano...');
     
-    self.feedList = QListWidget()
+    self.feedListWidget = QListWidget()
   
 
     
     
-    self.feedList.setMinimumWidth(200);
+    self.feedListWidget.setMinimumWidth(200);
     
 
     #layouts
@@ -97,7 +97,7 @@ class window(QWidget):
     
     self.midLinLayout.addLayout(self.listLayout);
     
-    self.listLayout.addWidget(self.feedList);
+    self.listLayout.addWidget(self.feedListWidget);
     #self.listLayout.addLayout(self.listButtLayout); #ten layout chyba do usunięcia
     #self.listButtLayout.addWidget(self.addNewFeedButton);
     #self.listButtLayout.addWidget(self.reloadFeedsButton);
