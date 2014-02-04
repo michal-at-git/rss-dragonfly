@@ -13,7 +13,7 @@ class DB:
       
   def send(self, query):
     self.cursor.execute(query);
-      
+    self.dbHandle.commit();
   def getFeedList(self):
     self.cursor.execute('select * from feedList');
     raw = self.cursor.fetchall();

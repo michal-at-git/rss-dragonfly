@@ -59,22 +59,3 @@ class Feed:
 	<li>nieobsługiwane znaczniki</li>
       </ul></article>""";
 
-      
-  def add(self):
-    0
-    ##!!! DEPR
-    
-    
-    
-    #from db import db;
-    
-    #if(len(self.url) > 0 and len(self.name)>0):
-      #query = "insert into feedList(name, addr) values ('"+self.name+"', '"+self.url+"');";
-
-      #try:
-	#database = db();
-	#database.send(query);
-	
-      #except:
-	#print "adding feed into database failed"
-      

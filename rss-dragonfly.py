@@ -6,7 +6,7 @@
 Main class of RSS Dragonfly
 """
 
-__version__ =  '1.1 - milestone 1'
+__version__ =  '1.1 - milestone 2'
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
@@ -54,7 +54,7 @@ class rss_dragonfly(Window):
     self.connect(self.addNewFeedButton, SIGNAL("clicked()"), self.addFeedPopup.exec_)
    
 
-    self.feedListWidget.itemActivated.connect(self.feedSelected);
+    self.feedListWidget.itemActivated.connect(self.listItemSelected);
 
     #	self.connect(self.reloadFeedsButton, SIGNAL("clicked()"), self.updateFeeds)
     self.rmFeedButton.setEnabled(False);
@@ -70,30 +70,37 @@ class rss_dragonfly(Window):
     
     
     
-  def readFeed(self):
+  def readFeed(self,url=False):
     if len(self.addressInput.text()) > 1:
+      
       feedsrc = Feed(self.addressInput.text());
       feedsrc.generate();
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feedsrc.h1, feedsrc.content)));
       self.updateTitle(feedsrc.h1);
       
+    elif(len(url) > 1):
+      feedsrc = Feed(url);
+      feedsrc.generate();
+      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feedsrc.h1, feedsrc.content)));
+      self.updateTitle(feedsrc.h1);
       
   def addFeed(self):
-    newFeed = Feed(str(self.addFeedPopup.address.text()), str(self.addFeedPopup.name.text()));
-    newFeed.add();
+    self.readFeed(str(self.addFeedPopup.address.text()));
+    self.feedList.add(str(self.addFeedPopup.name.text()), str(self.addFeedPopup.address.text()));
     self.addFeedPopup.close();
-  def rmFeed(self):
-    #self.feed_list.rmItem(selected.item());
-    print self.feedListWidget.currentItem().text();
     
+  def rmFeed(self):
+    fromListId =  self.feedListWidget.indexFromItem(self.selected).row();
+    self.feedList.remove(fromListId);
+    self.rmFeedButton.setEnabled(False);
+
+        
   def quit(self):
     rsssq.quit();
     
-  def feedSelected(self,selected):
-
-    print "opening feeds.. :)"
+  def listItemSelected(self,selected):
     self.rmFeedButton.setEnabled(True);
-
+    self.selected = selected;
     
 
   

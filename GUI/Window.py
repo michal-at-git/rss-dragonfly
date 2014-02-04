@@ -43,7 +43,6 @@ class Window(QWidget):
     self.statusDisplay = QLabel(u'załadowano...');
     
     self.feedListWidget = QListWidget()
-  
 
     
     
