@@ -85,9 +85,10 @@ class rss_dragonfly(Window):
       self.updateTitle(feedsrc.h1);
       
   def addFeed(self):
-    self.readFeed(str(self.addFeedPopup.address.text()));
-    self.feedList.add(str(self.addFeedPopup.name.text()), str(self.addFeedPopup.address.text()));
-    self.addFeedPopup.close();
+    if(len(str(self.addFeedPopup.address.text()))>5 and len(self.addFeedPopup.name.text()) >2):
+      self.readFeed(str(self.addFeedPopup.address.text()));
+      self.feedList.add(str(self.addFeedPopup.name.text()), str(self.addFeedPopup.address.text()));
+      self.addFeedPopup.close();
     
   def rmFeed(self):
     fromListId =  self.feedListWidget.indexFromItem(self.selected).row();
