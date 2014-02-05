@@ -73,21 +73,21 @@ class rss_dragonfly(Window):
   def readFeed(self,url=False):
     if len(self.addressInput.text()) > 1:
       
-      feedsrc = Feed(self.addressInput.text());
-      feedsrc.generate();
-      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feedsrc.h1, feedsrc.content)));
-      self.updateTitle(feedsrc.h1);
+      self.feedsrc = Feed();
+      self.feedsrc.generateFromURL(str(self.addressInput.text()));
+      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.h1, self.feedsrc.content)));
+      self.updateTitle(self.feedsrc.h1);
       
     elif(len(url) > 1):
-      feedsrc = Feed(url);
-      feedsrc.generate();
-      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feedsrc.h1, feedsrc.content)));
-      self.updateTitle(feedsrc.h1);
+      self.feedsrc = Feed();
+      self.feedsrc.generateFromURL(url);
+      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.h1, self.feedsrc.content)));
+      self.updateTitle(self.feedsrc.h1);
       
   def addFeed(self):
     if(len(str(self.addFeedPopup.address.text()))>5 and len(self.addFeedPopup.name.text()) >2):
       self.readFeed(str(self.addFeedPopup.address.text()));
-      self.feedList.add(str(self.addFeedPopup.name.text()), str(self.addFeedPopup.address.text()));
+      self.feedList.add(str(self.addFeedPopup.name.text()), str(self.addFeedPopup.address.text()), self.feedsrc.src);
       self.addFeedPopup.close();
     
   def rmFeed(self):
@@ -100,8 +100,17 @@ class rss_dragonfly(Window):
     rsssq.quit();
     
   def listItemSelected(self,selected):
-    self.rmFeedButton.setEnabled(True);
     self.selected = selected;
+
+    fromListId =  self.feedListWidget.indexFromItem(self.selected).row();
+    source = self.feedList.read(fromListId);
+    self.feedsrc = Feed();
+    self.feedsrc.generateFromSource(source['src']);
+    self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.h1, self.feedsrc.content)));
+    self.updateTitle(self.feedsrc.h1);
+    
+
+    self.rmFeedButton.setEnabled(True);
     
 
   

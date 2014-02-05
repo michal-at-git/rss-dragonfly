@@ -25,3 +25,9 @@ class DB:
       i += 1;
       
     return results;
+    
+  def getSingleFeed(self, feedId):
+    self.cursor.execute('select * from feedList where id='+str(feedId));
+    n = self.cursor.fetchall();
+    
+    return {'id' : n[0][0], 'name' : n[0][1], 'addr' : n[0][2], 'src':n[0][3]};    
