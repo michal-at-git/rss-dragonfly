@@ -55,7 +55,7 @@ class Window(QWidget):
     self.topLinLayout = QHBoxLayout();
     self.midLinLayout = QHBoxLayout();
     self.listLayout = QVBoxLayout();
-    #self.listButtLayout = QHBoxLayout(); #chyba do usunięcia
+    self.listButtonsLayout = QHBoxLayout(); 
     
   
     #</DEFINITIONS>
@@ -68,7 +68,6 @@ class Window(QWidget):
     self.addNewFeedButton.setToolTip(u"Dodaj do listy nowy kanał RSS");
     self.reloadFeedsButton.setToolTip(u"Zaktualizuj kanały RSS");
     self.rmFeedButton.setToolTip(u"Usuń z listy kanał RSS");
-    #self.fromFileButton.setToolTip(u"Załaduj z pliku kanał RSS"); #w tym wydaniu zablokowany
     
    
 
@@ -83,11 +82,11 @@ class Window(QWidget):
     self.mainLayout.addLayout(self.midLinLayout);
     self.mainLayout.addWidget(self.statusDisplay);
     
-    self.topLinLayout.addWidget(self.addNewFeedButton);
-    self.topLinLayout.addWidget(self.reloadFeedsButton);
-    self.topLinLayout.addWidget(self.reloadOneFeedButton);
+    self.listButtonsLayout.addWidget(self.addNewFeedButton);
+    self.listButtonsLayout.addWidget(self.rmFeedButton);
+    self.listButtonsLayout.addWidget(self.reloadFeedsButton);
+    self.listButtonsLayout.addWidget(self.reloadOneFeedButton);
 
-    self.topLinLayout.addWidget(self.rmFeedButton);
     #self.topLinLayout.addWidget(self.fromFileButton); # w tym wydaniu zablokowany
     
     self.topLinLayout.addWidget(self.addressInput);
@@ -96,6 +95,7 @@ class Window(QWidget):
     
     self.midLinLayout.addLayout(self.listLayout);
     
+    self.listLayout.addLayout(self.listButtonsLayout);
     self.listLayout.addWidget(self.feedListWidget);
     #self.listLayout.addLayout(self.listButtLayout); #ten layout chyba do usunięcia
     #self.listButtLayout.addWidget(self.addNewFeedButton);
