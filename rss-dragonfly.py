@@ -46,17 +46,16 @@ class rss_dragonfly(Window):
     
 
     
-    #rssContentView singals
+    #status singals
     
     self.rssContentView.loadFinished.connect(self.statusLoaded);
-
-    
     self.connect(self.goButton, SIGNAL("clicked()"), self.readFeed);
+    
+
     self.connect(self.addressInput, SIGNAL("returnPressed()"), self.readFeed);
     
     #	self.connect(self.fromFileButton, SIGNAL("clicked()"), self.fromFile)
     self.connect(self.closeButton, SIGNAL("clicked()"), self.quit)
-    #	self.feedList.itemActivated.connect(self.readExistFeed)
     
     self.connect(self.addNewFeedButton, SIGNAL("clicked()"), self.addFeedPopup.exec_)
    
@@ -78,7 +77,7 @@ class rss_dragonfly(Window):
     
     
   def readFeed(self,url=False):
-    if len(self.addressInput.text()) > 1:
+    if len(str(self.addressInput.text())) > 1:
       if self.selected != False:
 	self.feedListWidget.setItemSelected(self.selected, False);
 	self.selected = False;
@@ -87,7 +86,9 @@ class rss_dragonfly(Window):
       self.feedsrc.generateFromURL(str(self.addressInput.text()));
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.h1, self.feedsrc.content)));
       self.updateTitle(self.feedsrc.h1);
-    elif(len(url) > 1):
+      self.rmFeedButton.setEnabled(False);
+
+    elif url != False and (len(str(url)) > 1):
       self.feedsrc = Feed();
       self.feedsrc.generateFromURL(url);
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.h1, self.feedsrc.content)));
