@@ -34,6 +34,7 @@ from os import remove
 
     
 class rss_dragonfly(Window):
+  selected = False;
   def __init__(self, parent=None):
     super(rss_dragonfly, self).__init__(parent);
     self.drawWindow();
@@ -72,6 +73,9 @@ class rss_dragonfly(Window):
     
   def readFeed(self,url=False):
     if len(self.addressInput.text()) > 1:
+      if self.selected != False:
+	self.feedListWidget.setItemSelected(self.selected, False);
+	self.selected = False;
       
       self.feedsrc = Feed();
       self.feedsrc.generateFromURL(str(self.addressInput.text()));
@@ -101,6 +105,7 @@ class rss_dragonfly(Window):
     
   def listItemSelected(self,selected):
     self.selected = selected;
+    self.addressInput.clear();
 
     fromListId =  self.feedListWidget.indexFromItem(self.selected).row();
     source = self.feedList.read(fromListId);
