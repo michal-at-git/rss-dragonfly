@@ -39,8 +39,7 @@ class Window(QWidget):
     self.reloadOneFeedButton = QPushButton();    
     self.rmFeedButton = QPushButton();
     
-    #self.status = QString(u'<div style=\"margin-left: 300%; color: blue;\">załadowano</div>');
-    self.statusDisplay = QLabel(u'załadowano...');
+    self.statusDisplay = QLabel();
     
     self.feedListWidget = QListWidget()
 
@@ -68,7 +67,10 @@ class Window(QWidget):
     self.addNewFeedButton.setToolTip(u"Dodaj do listy nowy kanał RSS");
     self.reloadFeedsButton.setToolTip(u"Zaktualizuj kanały RSS");
     self.rmFeedButton.setToolTip(u"Usuń z listy kanał RSS");
-    
+    self.reloadOneFeedButton.setToolTip(u"Odśwież wybrany kanał RSS");
+    self.goButton.setToolTip(u"Otwórz wybrany kanał RSS");
+    self.closeButton.setToolTip(u"Zamknij program RSS Dragonfly");
+
    
 
     
@@ -87,7 +89,6 @@ class Window(QWidget):
     self.listButtonsLayout.addWidget(self.reloadFeedsButton);
     self.listButtonsLayout.addWidget(self.reloadOneFeedButton);
 
-    #self.topLinLayout.addWidget(self.fromFileButton); # w tym wydaniu zablokowany
     
     self.topLinLayout.addWidget(self.addressInput);
     self.topLinLayout.addWidget(self.goButton);
@@ -97,10 +98,7 @@ class Window(QWidget):
     
     self.listLayout.addLayout(self.listButtonsLayout);
     self.listLayout.addWidget(self.feedListWidget);
-    #self.listLayout.addLayout(self.listButtLayout); #ten layout chyba do usunięcia
-    #self.listButtLayout.addWidget(self.addNewFeedButton);
-    #self.listButtLayout.addWidget(self.reloadFeedsButton);
-    #self.listButtLayout.addWidget(self.rmFeedButton);
+    
     
     self.midLinLayout.addWidget(self.rssContentView);
 
@@ -113,7 +111,7 @@ class Window(QWidget):
     
     self.setMinimumWidth(600);
     self.setMinimumHeight(400);
-    
+
   def updateTitle(self, h1):
         self.setWindowTitle(unicode(h1+" | RSS Dragonfly"));
 

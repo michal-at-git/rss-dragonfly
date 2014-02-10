@@ -45,9 +45,15 @@ class rss_dragonfly(Window):
     self.addFeedPopup = AddFeedDialog();
     
 
+    
+    #rssContentView singals
+    
+    self.rssContentView.loadFinished.connect(self.statusLoaded);
 
     
     self.connect(self.goButton, SIGNAL("clicked()"), self.readFeed);
+    self.connect(self.addressInput, SIGNAL("returnPressed()"), self.readFeed);
+    
     #	self.connect(self.fromFileButton, SIGNAL("clicked()"), self.fromFile)
     self.connect(self.closeButton, SIGNAL("clicked()"), self.quit)
     #	self.feedList.itemActivated.connect(self.readExistFeed)
@@ -81,7 +87,6 @@ class rss_dragonfly(Window):
       self.feedsrc.generateFromURL(str(self.addressInput.text()));
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.h1, self.feedsrc.content)));
       self.updateTitle(self.feedsrc.h1);
-      
     elif(len(url) > 1):
       self.feedsrc = Feed();
       self.feedsrc.generateFromURL(url);
@@ -117,6 +122,12 @@ class rss_dragonfly(Window):
 
     self.rmFeedButton.setEnabled(True);
     
+    
+  #temporary!!!
+  def statusLoading(self):
+    self.statusDisplay.setText(u"Ładowanie");
+  def statusLoaded(self):
+    self.statusDisplay.setText(u"Załadowano");
 
   
     
