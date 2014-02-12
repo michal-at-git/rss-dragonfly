@@ -16,19 +16,24 @@ class Feed:
   description = [];
   content = "";
   
-  def __init__(self, url):
+  def fromURL(self, url):
 
     self.url = url;
     self.handle = Source(self.url); 
     self.src = self.handle.getSource();
     parsedSrc = feedparser.parse(self.src);
     tLength = len( parsedSrc.entries);
+    self.feedTitle = parsedSrc.feed.title;
 	
     for i in range(0, (tLength-1)):
       self.title.append(parsedSrc.entries[i].title);
       self.pubDate.append(parsedSrc.entries[i].published);
       self.description.append(parsedSrc.entries[i].description);
-
+      
+  def fromDB(self, url):
+    0;
+      
+      
 ##STWORZYĆ WYJĄTKI I REAKCJE NA PODSTAWIE KODÓW Z cURL'a!!!
       
   def toHTML(self):

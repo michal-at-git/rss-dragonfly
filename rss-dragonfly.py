@@ -83,9 +83,9 @@ class rss_dragonfly(Window):
 	self.selected = False;
       
       self.feedsrc = Feed();
-      self.feedsrc.generateFromURL(str(self.addressInput.text()));
-      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.h1, self.feedsrc.content)));
-      self.updateTitle(self.feedsrc.h1);
+      self.feedsrc.fromURL(str(self.addressInput.text()));
+      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.feedTitle, self.feedsrc.toHTML())));
+      self.updateTitle(self.feedsrc.feedTitle);
       self.rmFeedButton.setEnabled(False);
 
     elif url != False and (len(str(url)) > 1):

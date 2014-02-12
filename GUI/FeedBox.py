@@ -70,7 +70,6 @@ class FeedBox(object):
     """
   @staticmethod
   def showFeeds(h1, content):
-    
     return """<!doctype html>
     <head>
     <meta charset="utf-8"/>
@@ -81,7 +80,9 @@ class FeedBox(object):
     <header>
     <h1>"""+h1+"""</h1>
     </header>
+    <article>
     """+content+"""
+    </article>
     </body>
     </html> 
     """
