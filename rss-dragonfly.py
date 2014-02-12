@@ -6,7 +6,7 @@
 Main class of RSS Dragonfly
 """
 
-__version__ =  '1.1 - milestone 2'
+__version__ =  '1.1 - milestone 3' #/5
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *

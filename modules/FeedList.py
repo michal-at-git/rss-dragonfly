@@ -20,8 +20,8 @@ class FeedList():
       self.feedListItems.append(item['id']);
    
   def add(self, name, url, source):
-    self.dbHandle.send('insert into feedList(name, addr, content) values (\''+name+'\',\''+url+'\', \''+source+'\')');
-    self.refresh();
+    #self.dbHandle.send('insert into feedList(name, addr, content) values (\''+name+'\',\''+url+'\', \''+source+'\')');
+    #self.refresh();
   
   def read(self,feedId):
     res = self.dbHandle.getSingleFeed(self.feedListItems[feedId]);
