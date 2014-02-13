@@ -6,22 +6,20 @@ import StringIO;
 import img;
 from Source import Source;
 
-class Feed:
-  url = False;
-  handle = False; 
-  src = False;
-  feedTitle = False;
-  title = [];
-  pubDate = [];
-  description = [];
-  content = "";
-  
-  def fromURL(self, url):
-
-    self.url = url;
-    self.handle = Source(self.url); 
-    self.src = self.handle.getSource();
-    parsedSrc = feedparser.parse(self.src);
+class Feed:  
+  def __init__(self, source):
+    self.url = False;
+    self.handle = False; 
+    self.source = False;
+    self.feedTitle = False;
+    self.title = [];
+    self.pubDate = [];
+    self.description = [];
+    self.content = "";
+    
+    
+    self.source = source;
+    parsedSrc = feedparser.parse(self.source);
     tLength = len( parsedSrc.entries);
     self.feedTitle = parsedSrc.feed.title;
 	
@@ -29,15 +27,13 @@ class Feed:
       self.title.append(parsedSrc.entries[i].title);
       self.pubDate.append(parsedSrc.entries[i].published);
       self.description.append(parsedSrc.entries[i].description);
-      
-  def fromDB(self, url):
-    0;
+    print self.title;
       
       
 ##STWORZYĆ WYJĄTKI I REAKCJE NA PODSTAWIE KODÓW Z cURL'a!!!
       
   def toHTML(self):
-    length = len(self.title);
+    length = len(self.title)-1;
     for i in range(0, length):
       self.content += """<article><h2>"""+self.title[i]+"""</h2>
       <div class=\"pubDate\">"""+self.pubDate[i]+"""</div>

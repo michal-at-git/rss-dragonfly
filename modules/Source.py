@@ -3,10 +3,11 @@
 
 import pycurl;
 import cStringIO;
-
+from DB import DB;
 
 class Source:
-  def __init__(self, url):
+  source = False;
+  def fromURL(self, url):
     try:
       self.url = url;
       handle = pycurl.Curl();
@@ -23,7 +24,9 @@ class Source:
       buff.close();
     except:
       self.source = False;
-
-  def getSource(self):
+      
     return self.source;
-    
+  #v 1.2  
+  #def fromFile(self, fname):
+    #0;
+
