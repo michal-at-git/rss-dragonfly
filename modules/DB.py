@@ -21,13 +21,25 @@ class DB:
     i=0
     results = [];
     for n in raw:
-      results.append({'id' : n[0], 'name' : n[1], 'addr' : n[2]});    
+      self.cursor.execute('select * from items where feed_id='+str(n[0]));
+      n2 = self.cursor.fetchall();
+      feeds = [];
+      for x in n2:
+	feeds.append({'id':x[0], 'feed_id':x[1], 'title':x[2], 'pubDate':x[3], 'description':x[4] });
+	
+      results.append({'id' : n[0], 'name' : n[1], 'addr' : n[2],'FeedTitle':n[3], 'content':feeds});    
       i += 1;
       
     return results;
     
-  def getSingleFeed(self, feedId):
+  def getSingleSubscription(self, feedId):
     self.cursor.execute('select * from feedList where id='+str(feedId));
     n = self.cursor.fetchall();
     
-    return {'id' : n[0][0], 'name' : n[0][1], 'addr' : n[0][2], 'src':n[0][3]};    
+    self.cursor.execute('select * from items where feed_id='+str(feedId));
+    n2 = self.cursor.fetchall();
+    feeds = [];
+    for x in n2:
+      feeds.append({'id':x[0], 'feed_id':x[1], 'title':x[2], 'pubDate':x[3], 'description':x[4] });
+    
+    return {'id' : n[0][0], 'name' : n[0][1], 'addr' : n[0][2], 'FeedTitle':n[0][3], 'content':feeds};    
