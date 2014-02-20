@@ -3,6 +3,7 @@
 
 from PyQt4.QtGui import *
 from Feed import Feed;
+from DB import DB;
 
 class FeedList():
   def __init__(self, feedListWidget, dbHandle):
@@ -19,10 +20,12 @@ class FeedList():
       self.feedListWidget.addItem(item['name']);
       self.feedListItems.append(item['id']);
    
-  def add(self, name, url, source):
+  def add(self, feed, name, address):
     
-    self.dbHandle.send('insert into feedList(name, addr, content) values (\''+name+'\',\''+url+'\', \''+source+'\')');
-    self.refresh();
+    self.dbHandle.send('insert into feedList(name, addr, FeedTitle) values (\''+str(name)+'\',\''+str(address)+'\', \''+feed.feedTitle+'\')');
+    
+    #self.dbHandle.send('insert into items(name, addr, content) values (\''+name+'\',\''+feed.url+'\', \''+feed.feedTitle+'\')');
+    #self.refresh();
   
   def read(self,feedId):
     res = self.dbHandle.getSingleFeed(self.feedListItems[feedId]);

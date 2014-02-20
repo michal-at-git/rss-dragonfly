@@ -27,7 +27,6 @@ class Feed:
       self.title.append(parsedSrc.entries[i].title);
       self.pubDate.append(parsedSrc.entries[i].published);
       self.description.append(parsedSrc.entries[i].description);
-    print self.title;
       
       
 ##STWORZYĆ WYJĄTKI I REAKCJE NA PODSTAWIE KODÓW Z cURL'a!!!

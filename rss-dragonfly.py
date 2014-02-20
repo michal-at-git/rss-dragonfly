@@ -65,7 +65,7 @@ class rss_dragonfly(Window):
     #popUp
     
     #popUp signals:
-    #self.connect(self.addFeedPopup.send, SIGNAL("clicked()"), self.addFeed);
+    self.connect(self.addFeedPopup.send, SIGNAL("clicked()"), self.addFeed);
     self.connect(self.addFeedPopup.cancel, SIGNAL("clicked()"), self.addFeedPopup.close);
 
     
@@ -90,11 +90,16 @@ class rss_dragonfly(Window):
       #self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.h1, self.feedsrc.content)));
       #self.updateTitle(self.feedsrc.h1);
       
-  #def addFeed(self):
-    #if(len(str(self.addFeedPopup.address.text()))>5 and len(self.addFeedPopup.name.text()) >2):
-      #self.readFeed(str(self.addFeedPopup.address.text()));
-      #self.feedList.add(str(self.addFeedPopup.name.text()), str(self.addFeedPopup.address.text()), self.feedsrc.src);
-      #self.addFeedPopup.close();
+  def addFeed(self):
+    if(len(str(self.addFeedPopup.address.text()))>5 and len(self.addFeedPopup.name.text()) >2):
+      source = Source();
+      source = source.fromURL(str(self.addFeedPopup.address.text()))
+      feed = Feed(source);
+      self.feedList.add(feed, self.addFeedPopup.name.text(), self.addFeedPopup.address.text());
+      self.addFeedPopup.name.clear();
+      self.addFeedPopup.address.clear();
+
+      self.addFeedPopup.close();
     
   #def rmFeed(self):
     #fromListId =  self.feedListWidget.indexFromItem(self.selected).row();

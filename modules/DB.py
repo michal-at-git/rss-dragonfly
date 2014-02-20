@@ -42,4 +42,11 @@ class DB:
     for x in n2:
       feeds.append({'id':x[0], 'feed_id':x[1], 'title':x[2], 'pubDate':x[3], 'description':x[4] });
     
-    return {'id' : n[0][0], 'name' : n[0][1], 'addr' : n[0][2], 'FeedTitle':n[0][3], 'content':feeds};    
+    return {'id' : n[0][0], 'name' : n[0][1], 'addr' : n[0][2], 'FeedTitle':n[0][3], 'content':feeds};   
+    
+  def lastID(self):
+    self.cursor.execute('select id from feedList order by id desc');
+    res = self.cursor.fetchall();
+    
+    return res[0][0];
+
