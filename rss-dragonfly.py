@@ -59,7 +59,7 @@ class rss_dragonfly(Window):
 
     #	self.connect(self.reloadFeedsButton, SIGNAL("clicked()"), self.updateFeeds)
     self.rmFeedButton.setEnabled(False);
-    #self.connect(self.rmFeedButton, SIGNAL("clicked()"), self.rmFeed)
+    self.connect(self.rmFeedButton, SIGNAL("clicked()"), self.rmFeed)
 
     
     #popUp
@@ -101,25 +101,25 @@ class rss_dragonfly(Window):
 
       self.addFeedPopup.close();
     
-  #def rmFeed(self):
+  def rmFeed(self):
     #fromListId =  self.feedListWidget.indexFromItem(self.selected).row();
-    #self.feedList.remove(fromListId);
-    #self.rmFeedButton.setEnabled(False);
+    self.feedList.remove(self.selected);
+    self.rmFeedButton.setEnabled(False);
 
         
   def quit(self):
     rsssq.quit();
     
   def listItemSelected(self,selected):
-    self.selected = selected;
+    #self.selected = selected;
     self.addressInput.clear();
 
-    fromListId =  self.feedListWidget.indexFromItem(self.selected).row();
+    self.selected =  self.feedListWidget.indexFromItem(selected).row();
     #source = self.feedList.read(fromListId);
-    self.feedsrc = Feed();
-    self.feedsrc.generateFromSource(source['src']);
-    self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.h1, self.feedsrc.content)));
-    self.updateTitle(self.feedsrc.h1);
+    #self.feedsrc = Feed();
+    #self.feedsrc.generateFromSource(source['src']);
+    #self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.h1, self.feedsrc.content)));
+    #self.updateTitle(self.feedsrc.h1);
     
 
     self.rmFeedButton.setEnabled(True);

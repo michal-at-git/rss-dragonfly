@@ -36,7 +36,8 @@ class FeedList():
     
   def remove(self, feed_id):
     self.dbHandle.send('delete from feedList where id='+str(self.feedListItems[feed_id]));
-   
+    self.dbHandle.send('delete from items where feed_id='+str(self.feedListItems[feed_id]));
+
     self.refresh();
     
   
