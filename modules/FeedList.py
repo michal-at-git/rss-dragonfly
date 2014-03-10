@@ -24,8 +24,11 @@ class FeedList():
     
     self.dbHandle.send('insert into feedList(name, addr, FeedTitle) values (\''+str(name)+'\',\''+str(address)+'\', \''+feed.feedTitle+'\')');
     
-    #self.dbHandle.send('insert into items(name, addr, content) values (\''+name+'\',\''+feed.url+'\', \''+feed.feedTitle+'\')');
-    #self.refresh();
+    size = (len(feed.title))-1;
+
+    for i in range(0, size):
+      self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values (\''+str(self.dbHandle.lastID())+'\',\''+feed.title[i].replace("'","&#39;")+'\', \''+feed.pubDate[i].replace("'","&#39;")+'\', \''+feed.description[i].replace("'","&#39;")+'\')');
+    self.refresh();
   
   def read(self,feedId):
     res = self.dbHandle.getSingleFeed(self.feedListItems[feedId]);
