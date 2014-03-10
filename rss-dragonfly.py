@@ -19,6 +19,7 @@ sys.setdefaultencoding("utf-8");
 sys.path.append('GUI/');
 from Window import *;
 from AddFeedDialog import *;
+from AboutDialog import *;
 
 sys.path.append('modules/');
 import FeedBox;
@@ -38,10 +39,12 @@ class rss_dragonfly(Window):
     self.database = DB();
     self.feedList = FeedList(self.feedListWidget, self.database);
     self.addFeedPopup = AddFeedDialog();
-    
+    self.aboutDialog = AboutDialog();
 
     
     #status singals
+    self.connect(self.aboutButton, SIGNAL("clicked()"), self.aboutDialog.exec_);
+
     
     self.rssContentView.loadFinished.connect(self.statusLoaded);
     self.connect(self.goButton, SIGNAL("clicked()"), self.readFromAddrBar);

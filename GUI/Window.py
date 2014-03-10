@@ -4,7 +4,7 @@
 """
 Window front-end class 
 """
-__version__ =  '1.1 - milestone 1'
+__version__ =  '1.1 - milestone 3'
 __name__ = 'window';
 
 from PyQt4.QtGui import *;
@@ -38,7 +38,9 @@ class Window(QWidget):
     self.reloadFeedsButton = QPushButton();
     self.reloadOneFeedButton = QPushButton();    
     self.rmFeedButton = QPushButton();
-    
+    self.saveFromAddrButton = QPushButton();
+    self.aboutButton = QPushButton();
+
     self.statusDisplay = QLabel();
     
     self.feedListWidget = QListWidget()
@@ -63,6 +65,10 @@ class Window(QWidget):
     self.reloadFeedsButton.setIcon(QIcon("GUI/reload.png"));
     self.reloadOneFeedButton.setIcon(QIcon("GUI/reload_one.png"));
     self.rmFeedButton.setIcon(QIcon("GUI/minus.png"));
+    self.saveFromAddrButton.setIcon(QIcon("GUI/star.png"));
+    self.aboutButton.setIcon(QIcon("GUI/ikonka.png"));
+
+
     #setting tooltips
     self.addNewFeedButton.setToolTip(u"Dodaj do listy nowy kanał RSS");
     self.reloadFeedsButton.setToolTip(u"Zaktualizuj kanały RSS");
@@ -70,6 +76,8 @@ class Window(QWidget):
     self.reloadOneFeedButton.setToolTip(u"Odśwież wybrany kanał RSS");
     self.goButton.setToolTip(u"Otwórz wybrany kanał RSS");
     self.closeButton.setToolTip(u"Zamknij program RSS Dragonfly");
+    self.saveFromAddrButton.setToolTip(u"Zapisz kanał na liście");
+    self.aboutButton.setToolTip(u"Informacja o programie");
 
    
 
@@ -89,10 +97,12 @@ class Window(QWidget):
     self.listButtonsLayout.addWidget(self.reloadFeedsButton);
     self.listButtonsLayout.addWidget(self.reloadOneFeedButton);
 
-    
+    self.topLinLayout.addWidget(self.saveFromAddrButton);
     self.topLinLayout.addWidget(self.addressInput);
     self.topLinLayout.addWidget(self.goButton);
     self.topLinLayout.addWidget(self.closeButton);
+    self.topLinLayout.addWidget(self.aboutButton);
+
     
     self.midLinLayout.addLayout(self.listLayout);
     
