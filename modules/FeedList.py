@@ -27,17 +27,30 @@ class FeedList():
     size = (len(feed.title))-1;
 
     for i in range(0, size):
-      self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values (\''+str(self.dbHandle.lastID())+'\',\''+feed.title[i].replace("'","&#39;")+'\', \''+feed.pubDate[i].replace("'","&#39;")+'\', \''+feed.description[i].replace("'","&#39;")+'\')');
+      self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values ('+str(self.dbHandle.lastID())+',\''+feed.title[i].replace("'","&#39;")+'\', \''+feed.pubDate[i].replace("'","&#39;")+'\', \''+feed.description[i].replace("'","&#39;")+'\')');
     self.refresh();
-  
-  def read(self,feedId):
-    res = self.dbHandle.getSingleFeed(self.feedListItems[feedId]);
-    return res;
     
   def remove(self, feed_id):
     self.dbHandle.send('delete from feedList where id='+str(self.feedListItems[feed_id]));
     self.dbHandle.send('delete from items where feed_id='+str(self.feedListItems[feed_id]));
 
     self.refresh();
+
+  def getSingleSubscription(self, feed_id):
+    feed = self.dbHandle.getSingleSubscription(self.feedListItems[feed_id]);
+    return feed;
+
+  def getSingleSubscriptionToHTML(self, feed_id):
+    
+    feed = self.dbHandle.getSingleSubscription(self.feedListItems[feed_id]);
+    size = (len(feed['content']))-1;
+    result = "";
+    for i in range(0, size):
+      result += """<article><h2>"""+feed['content'][i]['title']+"""</h2>
+      <div class=\"pubDate\">"""+feed['content'][i]['pubDate']+"""</div>
+      <div class=\"description\">"""+feed['content'][i]['description']+"""</div></article>
+      """;
+    return result;
+    
     
   

@@ -4,7 +4,7 @@
 """
 Window front-end class 
 """
-__version__ =  '1.1 - milestone 3'
+__version__ =  '1.1 - milestone 4'
 __name__ = 'window';
 
 from PyQt4.QtGui import *;

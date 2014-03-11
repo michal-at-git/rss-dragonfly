@@ -6,7 +6,7 @@
 Main class of RSS Dragonfly
 """
 
-__version__ =  '1.1 - milestone 3' #/5
+__version__ =  '1.1 - milestone 4' #/5
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
@@ -118,10 +118,10 @@ class rss_dragonfly(Window):
     self.addressInput.clear();
 
     self.selected =  self.feedListWidget.indexFromItem(selected).row();
-    #source = self.feedList.read(fromListId);
-    #self.feedsrc = Feed();
-    #self.feedsrc.generateFromSource(source['src']);
-    #self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.h1, self.feedsrc.content)));
+    
+    html = self.feedList.getSingleSubscriptionToHTML(self.selected);
+    feedSingle = self.feedList.getSingleSubscription(self.selected);
+    self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feedSingle['FeedTitle'], html)));
     #self.updateTitle(self.feedsrc.h1);
     
 

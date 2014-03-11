@@ -64,7 +64,7 @@ class FeedBox(object):
     <header>
     <h1>Witaj w RSS Dragonfly</h1>
     </header>
-    <h2>Wersja 1.1 milestone 1</h2>
+    <h2>Wersja 1.1 milestone 4</h2>
     </body>
     </html>
     """

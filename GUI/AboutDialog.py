@@ -11,7 +11,7 @@ from PyQt4.QtCore import *
 class AboutDialog(QDialog):
   def __init__(self, parent=None):
     super(AboutDialog, self).__init__(parent);
-    about = """<img src="GUI/ikonka_big.png" alt="" /> <b>RSS Dragonfly 1.1</b>""";
+    about = """<p valign="middle"><img src="GUI/ikonka.png" alt="" /> <b>RSS Dragonfly 1.1</b></p>""";
     mainLayout = QVBoxLayout();
     mainLabel = QLabel(about);
     
