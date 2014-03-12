@@ -63,7 +63,7 @@ class rss_dragonfly(Window):
     #	self.connect(self.reloadFeedsButton, SIGNAL("clicked()"), self.updateFeeds)
     self.rmFeedButton.setEnabled(False);
     self.connect(self.rmFeedButton, SIGNAL("clicked()"), self.rmFeed)
-
+    self.connect(self.saveFromAddrButton, SIGNAL("clicked()"), self.saveOpened);
     
     #popUp
     
@@ -133,6 +133,12 @@ class rss_dragonfly(Window):
     self.statusDisplay.setText(u"Ładowanie");
   def statusLoaded(self):
     self.statusDisplay.setText(u"Załadowano");
+    
+  def saveOpened(self):
+    self.addFeedPopup.name.setText("Nowa subskrypcja");
+    self.addFeedPopup.address.setText(self.addressInput.text());
+    
+    self.addFeedPopup.exec_();
 
   
     
