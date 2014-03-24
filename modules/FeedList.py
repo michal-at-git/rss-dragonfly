@@ -52,5 +52,23 @@ class FeedList():
       """;
     return result;
     
+  def updateN(self, feedId, feed):
+    #this is featured method maybe for next release... ;/
+    lastFeed = self.dbHandle.getLastSubscription(feedId); #NOT FINISHED!!!
+    
+    size = (len(feed.title)-1);
+    
+    for i in range(0, size):
+    
+      if (5+5 == 10): #lastFeed['pubDate'] date > od higher than last from subscription     
+	self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values...');
     
   
+  def update(self, feedId, feed):
+    
+    #size = (len(feed.title)-1);
+    size = 2; #for test and demonstration
+    self.dbHandle.send('delete from items where feed_id='+str(feedId));
+    
+    #for i in range(0, size):
+      #self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values ('+str(feedId)+',\''+feed.title[i].replace("'","&#39;")+'\', \''+feed.pubDate[i].replace("'","&#39;")+'\', \''+feed.description[i].replace("'","&#39;")+'\')');

@@ -60,7 +60,7 @@ class rss_dragonfly(Window):
 
     self.feedListWidget.itemActivated.connect(self.listItemSelected);
 
-    #	self.connect(self.reloadFeedsButton, SIGNAL("clicked()"), self.updateFeeds)
+    self.connect(self.reloadFeedsButton, SIGNAL("clicked()"), self.updateFeeds)
     self.rmFeedButton.setEnabled(False);
     self.connect(self.rmFeedButton, SIGNAL("clicked()"), self.rmFeed)
     self.connect(self.saveFromAddrButton, SIGNAL("clicked()"), self.saveOpened);
@@ -86,12 +86,6 @@ class rss_dragonfly(Window):
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feed.feedTitle, feed.toHTML())));
       self.updateTitle(feed.feedTitle);
       self.rmFeedButton.setEnabled(False);
-
-    #elif url != False and (len(str(url)) > 1):
-      #self.feedsrc = Feed();
-      #self.feedsrc.generateFromURL(url);
-      #self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(self.feedsrc.h1, self.feedsrc.content)));
-      #self.updateTitle(self.feedsrc.h1);
       
   def addFeed(self):
     if(len(str(self.addFeedPopup.address.text()))>5 and len(self.addFeedPopup.name.text()) >2):
@@ -139,6 +133,15 @@ class rss_dragonfly(Window):
     self.addFeedPopup.address.setText(self.addressInput.text());
     
     self.addFeedPopup.exec_();
+    
+    
+  def updateFeeds(self):
+    items = self.feedList.feedListItems;
+    source = Source();
+    for Id in items:
+      #source = source.fromURL(0); #here will be address from database
+      self.feedList.update(Id,""); #?????????????????????!!!!!!!!!!!!!!!!!!-----------
+    
 
   
     
