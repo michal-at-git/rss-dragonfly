@@ -53,7 +53,6 @@ class FeedList():
     return result;
     
   def updateAll(self, Feed, Source):
-    print self.feedListItems;
     for feed_id in self.feedListItems:
       
       #deleting old feeds
@@ -67,42 +66,18 @@ class FeedList():
     
       for i in range(0, size):
 	self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values ('+str(feed_id)+',\''+feed.title[i]+'\', \''+feed.pubDate[i]+'\', \''+feed.description[i]+'\')');
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+	
+	
+  def updateSelectedFeed(self, selected_id, Feed, Source):
+    feed_id = self.feedListItems[selected_id];
+    self.dbHandle.send('delete from items where feed_id='+str(feed_id));
+    source = Source();
+
+    feed_from_db = self.dbHandle.getSingleSubscription(feed_id);
+    source = source.fromURL(str(feed_from_db['addr']));
+    feed = Feed(source);
+    size = (len(feed.title)-1);
     
-    #source = Source();
-    #feed = Feed(source); 
-    #this is featured method maybe for next release... ;/
-    lastFeed = self.dbHandle.getLastSubscription(1); #NOT FINISHED!!!
-    
-    #size = (len(feed.title)-1);
-    #print feed.title
-    #for i in range(0, size):
+    for i in range(0, size):
+      self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values ('+str(feed_id)+',\''+feed.title[i]+'\', \''+feed.pubDate[i]+'\', \''+feed.description[i]+'\')');
       
-      #print lastFeed['pubDate'];
-      #print feed[i]['pubDate'];
-      
-      
-    
-      #if (5+5 == 10): #lastFeed['pubDate'] date > od higher than last from subscription     
-	#self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values...');
-    
-  
-  #def update(self, feedId, feed):
-    
-    ##size = (len(feed.title)-1);
-    #size = 2; #for test and demonstration
-    #self.dbHandle.send('delete from items where feed_id='+str(feedId));
-    
-    ##for i in range(0, size):
-      ##self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values ('+str(feedId)+',\''+feed.title[i].replace("'","&#39;")+'\', \''+feed.pubDate[i].replace("'","&#39;")+'\', \''+feed.description[i].replace("'","&#39;")+'\')');

@@ -5,6 +5,7 @@
 """
 Main class of RSS Dragonfly
 """
+#TODO REFRESH SCREEN ON UPDATE SELECTED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 __version__ =  '1.1 - milestone 4' #/5
 
@@ -52,7 +53,6 @@ class rss_dragonfly(Window):
 
     self.connect(self.addressInput, SIGNAL("returnPressed()"), self.readFromAddrBar);
     
-    #	self.connect(self.fromFileButton, SIGNAL("clicked()"), self.fromFile)
     self.connect(self.closeButton, SIGNAL("clicked()"), self.quit)
     
     self.connect(self.addNewFeedButton, SIGNAL("clicked()"), self.addFeedPopup.exec_)
@@ -60,8 +60,10 @@ class rss_dragonfly(Window):
 
     self.feedListWidget.itemActivated.connect(self.listItemSelected);
 
-    self.connect(self.reloadFeedsButton, SIGNAL("clicked()"), self.updateFeeds)
-    self.rmFeedButton.setEnabled(False);
+    self.connect(self.reloadFeedsButton, SIGNAL("clicked()"), self.updateAllFeeds);
+    self.connect(self.reloadOneFeedButton, SIGNAL("clicked()"), self.updateSelectedFeed);
+
+    
     self.connect(self.rmFeedButton, SIGNAL("clicked()"), self.rmFeed)
     self.connect(self.saveFromAddrButton, SIGNAL("clicked()"), self.saveOpened);
     
@@ -70,6 +72,9 @@ class rss_dragonfly(Window):
     #popUp signals:
     self.connect(self.addFeedPopup.send, SIGNAL("clicked()"), self.addFeed);
     self.connect(self.addFeedPopup.cancel, SIGNAL("clicked()"), self.addFeedPopup.close);
+    
+    self.reloadOneFeedButton.setDisabled(True);
+    self.rmFeedButton.setDisabled(True);
 
     
     
@@ -86,6 +91,7 @@ class rss_dragonfly(Window):
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feed.feedTitle, feed.toHTML())));
       self.updateTitle(feed.feedTitle);
       self.rmFeedButton.setEnabled(False);
+      self.reloadOneFeedButton.setEnabled(False);
       self.feedListWidget.clearSelection();
       
   def addFeed(self):
@@ -103,6 +109,7 @@ class rss_dragonfly(Window):
     #fromListId =  self.feedListWidget.indexFromItem(self.selected).row();
     self.feedList.remove(self.selected);
     self.rmFeedButton.setEnabled(False);
+    self.reloadOneFeedButton.setEnabled(False);
 
         
   def quit(self):
@@ -121,6 +128,7 @@ class rss_dragonfly(Window):
     
 
     self.rmFeedButton.setEnabled(True);
+    self.reloadOneFeedButton.setEnabled(True);
     
     
   #temporary!!!
@@ -136,17 +144,18 @@ class rss_dragonfly(Window):
     self.addFeedPopup.exec_();
     
     
-  def updateFeeds(self):
-    items = self.feedList.feedListItems;
-    #source = Source();
-    #feed = Feed();
-    #for Id in items:
-      #source = source.fromURL(0); #here will be address from database
-    self.feedList.updateAll(Feed,Source); #?????????????????????!!!!!!!!!!!!!!!!!!-----------
+  def updateAllFeeds(self):
+
+    self.feedList.updateAll(Feed,Source);
     self.feedListWidget.clearSelection();
+    self.rmFeedButton.setEnabled(False);
+    self.reloadOneFeedButton.setEnabled(False);
 
   
+  def updateSelectedFeed(self):
+    self.feedList.updateSelectedFeed(self.selected, Feed, Source);
     
+    #TODO REFRESH SCREEN
     
 rsssq = QApplication(sys.argv)
 rss_sq = rss_dragonfly() 
