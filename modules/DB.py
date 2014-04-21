@@ -49,7 +49,7 @@ class DB:
     #self.cursor.execute('select * from feedList where id='+str(feedId));
     #n = self.cursor.fetchall();
     
-    self.cursor.execute('select * from items where feed_id='+feedId+' order by id asc limit 1');
+    self.cursor.execute('select * from items where feed_id='+str(feedId)+' order by id asc limit 1');
     n2 = self.cursor.fetchall();
     feeds = False;
     for x in n2:
