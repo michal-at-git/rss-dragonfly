@@ -6,6 +6,7 @@
 Main class of RSS Dragonfly
 """
 #TODO REFRESH SCREEN ON UPDATE SELECTED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#TODO update titlebar
 
 __version__ =  '1.1 - milestone 4' #/5
 
@@ -124,7 +125,7 @@ class rss_dragonfly(Window):
     html = self.feedList.getSingleSubscriptionToHTML(self.selected);
     feedSingle = self.feedList.getSingleSubscription(self.selected);
     self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feedSingle['FeedTitle'], html)));
-    #self.updateTitle(self.feedsrc.h1);
+    self.updateTitle(feedSingle['FeedTitle']);
     
 
     self.rmFeedButton.setEnabled(True);
