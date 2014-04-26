@@ -88,22 +88,40 @@ class rss_dragonfly(Window):
       
       source = Source();
       source = source.fromURL(str(self.addressInput.text()));
-      feed = Feed(source);      
-      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feed.feedTitle, feed.toHTML())));
-      self.updateTitle(feed.feedTitle);
-      self.rmFeedButton.setEnabled(False);
-      self.reloadOneFeedButton.setEnabled(False);
-      self.feedListWidget.clearSelection();
+      if(source != False):
+	try:
+	  feed = Feed(source);      
+	  self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feed.feedTitle, feed.toHTML())));
+	  self.updateTitle(feed.feedTitle);
+	  self.rmFeedButton.setEnabled(False);
+	  self.reloadOneFeedButton.setEnabled(False);
+	  self.feedListWidget.clearSelection();
+	except:
+	  self.rssContentView.setHtml(unicode(FeedBox.FeedBox.parseError()));
+	  self.updateTitle("Nie udało się odczytać kanału RSS");
+	  
+      else:
+	self.rssContentView.setHtml(unicode(FeedBox.FeedBox.downloadError()));
+	self.updateTitle("Nie udało się załadować kanału RSS");
+	
       
   def addFeed(self):
     if(len(str(self.addFeedPopup.address.text()))>5 and len(self.addFeedPopup.name.text()) >2):
       source = Source();
       source = source.fromURL(str(self.addFeedPopup.address.text()))
-      feed = Feed(source);
-      self.feedList.add(feed, self.addFeedPopup.name.text(), self.addFeedPopup.address.text());
+      if(source != False):
+	try:
+	  feed = Feed(source);
+	  self.feedList.add(feed, self.addFeedPopup.name.text(), self.addFeedPopup.address.text());
+	except:
+	  self.rssContentView.setHtml(unicode(FeedBox.FeedBox.parseError()));
+	  self.updateTitle("Nie udało się odczytać kanału RSS");
+      else:
+	self.rssContentView.setHtml(unicode(FeedBox.FeedBox.downloadError()));
+	self.updateTitle("Nie udało się załadować kanału RSS");	
+	
       self.addFeedPopup.name.clear();
       self.addFeedPopup.address.clear();
-
       self.addFeedPopup.close();
     
   def rmFeed(self):
@@ -146,17 +164,25 @@ class rss_dragonfly(Window):
     
     
   def updateAllFeeds(self):
-
-    self.feedList.updateAll(Feed,Source);
-    self.feedListWidget.clearSelection();
+    try:
+      self.feedList.updateAll(Feed,Source);
+      self.feedListWidget.clearSelection();
+    except:
+      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.updateError()));
+      self.updateTitle("Nie udało się zaktualizować subskrypcji RSS"); 
+    
+    
     self.rmFeedButton.setEnabled(False);
     self.reloadOneFeedButton.setEnabled(False);
 
   
   def updateSelectedFeed(self):
-    self.feedList.updateSelectedFeed(self.selected, Feed, Source);
+    try:
+      self.feedList.updateSelectedFeed(self.selected, Feed, Source);
+    except:
+      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.updateError()));
+      self.updateTitle("Nie udało się zaktualizować subskrypcji RSS");
     
-    #TODO REFRESH SCREEN
     
 rsssq = QApplication(sys.argv)
 rss_sq = rss_dragonfly() 

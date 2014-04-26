@@ -7,6 +7,7 @@ from DB import DB;
 
 class Source:
   source = False;
+  
   def fromURL(self, url):
     try:
       self.url = url;

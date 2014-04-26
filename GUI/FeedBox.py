@@ -5,6 +5,7 @@ import sys;
 reload(sys);
 sys.setdefaultencoding("utf-8");
 
+import img;
 
 class FeedBox(object):
   global css
@@ -64,7 +65,7 @@ class FeedBox(object):
     <header>
     <h1>Witaj w RSS Dragonfly</h1>
     </header>
-    <h2>Wersja 1.1 milestone 4</h2>
+    <h2>Wersja 1.1 Alpha</h2>
     </body>
     </html>
     """
@@ -86,3 +87,58 @@ class FeedBox(object):
     </body>
     </html> 
     """
+  @staticmethod
+  def downloadError():
+    return """<!doctype html>
+	<head>
+	<meta charset="utf-8"/>
+	<title> </title>
+	<style>"""+css+"""</style>
+	</head>
+	<header>
+	<h1>Nie udało się załadować kanału RSS</h1>
+	</header>
+	<article>
+	<img src="""+img.error+""" alt="error" style="border: 0px;margin: 0px;"/>
+	<p style="margin-left: 70px; padding: 0px;">Prawdopodobne przyczyny:</p>
+	<ul style="margin-left: 70px">
+	<li>problem z połączeniem sieciowym</li>
+	<li>niepoprawnie wpisany adres</li>
+	</ul></article>""";
+  @staticmethod
+  def parseError():
+    return """<!doctype html>
+	<head>
+	<meta charset="utf-8"/>
+	<title> </title>
+	<style>"""+css+"""</style>
+	</head>
+	<header>
+	<h1>Nie udało się odczytać kanału RSS</h1>
+	</header>
+	<article>
+	<img src="""+img.error+""" alt="error" style="border: 0px;margin: 0px;"/>
+	<p style="margin-left: 70px; padding: 0px;">Prawdopodobne przyczyny:</p>
+	<ul style="margin-left: 70px">
+	<li>pobrana treść nie jest kanałem RSS</li>
+	<li>poważny błąd składniowy w skrypcie kanału RSS</li>
+	<li>nieobsługiwane znaczniki</li>
+	</ul></article>""";
+  @staticmethod
+  def updateError():
+    return """<!doctype html>
+	<head>
+	<meta charset="utf-8"/>
+	<title> </title>
+	<style>"""+css+"""</style>
+	</head>
+	<header>
+	<h1>Nie udało się zaktualizować subskrypcji RSS</h1>
+	</header>
+	<article>
+	<img src="""+img.error+""" alt="error" style="border: 0px;margin: 0px;"/>
+	<p style="margin-left: 70px; padding: 0px;">Prawdopodobne przyczyny:</p>
+	<ul style="margin-left: 70px">
+	<li>problem z połączeniem sieciowym</li>
+	<li>poważny błąd składniowy w skrypcie kanału RSS</li>
+	</ul></article>""";	

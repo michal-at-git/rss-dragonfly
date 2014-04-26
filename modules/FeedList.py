@@ -56,28 +56,35 @@ class FeedList():
     for feed_id in self.feedListItems:
       
       #deleting old feeds
-      self.dbHandle.send('delete from items where feed_id='+str(feed_id));
-      source = Source();
+      try:
+	source = Source();
 
-      feed_from_db = self.dbHandle.getSingleSubscription(feed_id);
-      source = source.fromURL(str(feed_from_db['addr']));
-      feed = Feed(source);
-      size = (len(feed.title)-1);
-    
-      for i in range(0, size):
-	self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values ('+str(feed_id)+',\''+feed.title[i]+'\', \''+feed.pubDate[i]+'\', \''+feed.description[i]+'\')');
-	
+	feed_from_db = self.dbHandle.getSingleSubscription(feed_id);
+	source = source.fromURL(str(feed_from_db['addr']));
+	feed = Feed(source);
+	self.dbHandle.send('delete from items where feed_id='+str(feed_id));
+
+	size = (len(feed.title)-1);
+      
+	for i in range(0, size):
+	  self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values ('+str(feed_id)+',\''+feed.title[i]+'\', \''+feed.pubDate[i]+'\', \''+feed.description[i]+'\')');
+      except:
+	raise Exception('downloadError', 'downloadError');	
 	
   def updateSelectedFeed(self, selected_id, Feed, Source):
     feed_id = self.feedListItems[selected_id];
-    self.dbHandle.send('delete from items where feed_id='+str(feed_id));
     source = Source();
 
     feed_from_db = self.dbHandle.getSingleSubscription(feed_id);
-    source = source.fromURL(str(feed_from_db['addr']));
-    feed = Feed(source);
-    size = (len(feed.title)-1);
+    try:
+      source = source.fromURL(str(feed_from_db['addr']));
     
-    for i in range(0, size):
-      self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values ('+str(feed_id)+',\''+feed.title[i]+'\', \''+feed.pubDate[i]+'\', \''+feed.description[i]+'\')');
+      feed = Feed(source);
+      size = (len(feed.title)-1);
       
+      self.dbHandle.send('delete from items where feed_id='+str(feed_id));
+
+      for i in range(0, size):
+	self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values ('+str(feed_id)+',\''+feed.title[i]+'\', \''+feed.pubDate[i]+'\', \''+feed.description[i]+'\')');
+    except:
+      raise Exception('downloadError', 'downloadError');
