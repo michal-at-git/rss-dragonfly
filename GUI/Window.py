@@ -41,7 +41,6 @@ class Window(QWidget):
     self.saveFromAddrButton = QPushButton();
     self.aboutButton = QPushButton();
 
-    self.statusDisplay = QLabel();
     
     self.feedListWidget = QListWidget()
 
@@ -90,7 +89,6 @@ class Window(QWidget):
     
     self.mainLayout.addLayout(self.topLinLayout);
     self.mainLayout.addLayout(self.midLinLayout);
-    self.mainLayout.addWidget(self.statusDisplay);
     
     self.listButtonsLayout.addWidget(self.addNewFeedButton);
     self.listButtonsLayout.addWidget(self.rmFeedButton);

@@ -18,7 +18,7 @@ class Source:
       handle.setopt(handle.WRITEFUNCTION, buff.write);
       handle.setopt(handle.CONNECTTIMEOUT, 7);    
       handle.setopt(handle.TIMEOUT, 12);
-      handle.setopt(handle.USERAGENT, "Mozilla/5.0 (compatible; Python; RSS Dragonfly) RSS_Dragonfly/1.1_pre-alpha");
+      handle.setopt(handle.USERAGENT, "Mozilla/5.0 (compatible; Python; RSS Dragonfly) RSS_Dragonfly/1.1_alpha");
       handle.perform();
       
       self.source = buff.getvalue();

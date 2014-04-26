@@ -44,11 +44,9 @@ class rss_dragonfly(Window):
     self.aboutDialog = AboutDialog();
 
     
-    #status singals
     self.connect(self.aboutButton, SIGNAL("clicked()"), self.aboutDialog.exec_);
 
     
-    self.rssContentView.loadFinished.connect(self.statusLoaded);
     self.connect(self.goButton, SIGNAL("clicked()"), self.readFromAddrBar);
     
 
@@ -150,11 +148,7 @@ class rss_dragonfly(Window):
     self.reloadOneFeedButton.setEnabled(True);
     
     
-  #temporary!!!
-  def statusLoading(self):
-    self.statusDisplay.setText(u"Ładowanie");
-  def statusLoaded(self):
-    self.statusDisplay.setText(u"Załadowano");
+
     
   def saveOpened(self):
     self.addFeedPopup.name.setText("Nowa subskrypcja");
