@@ -74,14 +74,18 @@ class rss_dragonfly(Window):
     
     self.reloadOneFeedButton.setDisabled(True);
     self.rmFeedButton.setDisabled(True);
-
+    self.saveFromAddrButton.setDisabled(True);
     
     
     
   def readFromAddrBar(self):
     if len(str(self.addressInput.text())) > 1:
       if self.selected != False:
-	self.feedListWidget.setItemSelected(self.selected, False);
+	
+	#double disabling selected element?
+	#print self.selected;
+
+	#self.feedListWidget.setItemSelected(self.selected, False);
 	self.selected = False;
       
       source = Source();
@@ -94,6 +98,10 @@ class rss_dragonfly(Window):
 	  self.rmFeedButton.setEnabled(False);
 	  self.reloadOneFeedButton.setEnabled(False);
 	  self.feedListWidget.clearSelection();
+	  self.saveFromAddrButton.setEnabled(True);
+	  self.addFeedPopup.name.setText(feed.feedTitle);
+	  
+
 	except:
 	  self.rssContentView.setHtml(unicode(FeedBox.FeedBox.parseError()));
 	  self.updateTitle("Nie udało się odczytać kanału RSS");
@@ -133,7 +141,6 @@ class rss_dragonfly(Window):
     rsssq.quit();
     
   def listItemSelected(self,selected):
-    #self.selected = selected;
     self.addressInput.clear();
 
     self.selected =  self.feedListWidget.indexFromItem(selected).row();
@@ -146,12 +153,12 @@ class rss_dragonfly(Window):
 
     self.rmFeedButton.setEnabled(True);
     self.reloadOneFeedButton.setEnabled(True);
-    
+    self.saveFromAddrButton.setEnabled(False);
+
     
 
     
   def saveOpened(self):
-    self.addFeedPopup.name.setText("Nowa subskrypcja");
     self.addFeedPopup.address.setText(self.addressInput.text());
     
     self.addFeedPopup.exec_();
