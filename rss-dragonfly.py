@@ -81,7 +81,6 @@ class rss_dragonfly(Window):
   def readFromAddrBar(self):
     if len(str(self.addressInput.text())) > 1:
       if self.selected != False:
-	
 	#double disabling selected element?
 	#print self.selected;
 

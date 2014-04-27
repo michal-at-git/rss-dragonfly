@@ -5,6 +5,7 @@ import feedparser;
 import StringIO;
 import img;
 from Source import Source;
+import time;
 
 class Feed:  
   def __init__(self, source):
@@ -25,7 +26,7 @@ class Feed:
 	
     for i in range(0, (tLength-1)):
       self.title.append((parsedSrc.entries[i].title).replace("'", "&#39;"));
-      self.pubDate.append(parsedSrc.entries[i].published);
+      self.pubDate.append(time.strftime("%d.%m.%Y %H:%M",parsedSrc.entries[i].published_parsed));
       self.description.append((parsedSrc.entries[i].description).replace("'", "&#39;"));
       
       
