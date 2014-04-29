@@ -93,7 +93,7 @@ class rss_dragonfly(Window):
 	try:
 	  feed = Feed(source);      
 	  self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feed.feedTitle, feed.toHTML())));
-	  self.updateTitle(feed.feedTitle);
+	  self.updateTitle(str(feed.feedTitle).replace("&#39;", "'"));
 	  self.rmFeedButton.setEnabled(False);
 	  self.reloadOneFeedButton.setEnabled(False);
 	  self.feedListWidget.clearSelection();
@@ -147,7 +147,7 @@ class rss_dragonfly(Window):
     html = self.feedList.getSingleSubscriptionToHTML(self.selected);
     feedSingle = self.feedList.getSingleSubscription(self.selected);
     self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feedSingle['FeedTitle'], html)));
-    self.updateTitle(feedSingle['FeedTitle']);
+    self.updateTitle(feedSingle['FeedTitle'].replace("&#39;", "'"));
     
 
     self.rmFeedButton.setEnabled(True);
@@ -166,7 +166,13 @@ class rss_dragonfly(Window):
   def updateAllFeeds(self):
     try:
       self.feedList.updateAll(Feed,Source);
-      self.feedListWidget.clearSelection();
+            
+      if(self.selected):      
+	#updating content on screen
+	html = self.feedList.getSingleSubscriptionToHTML(self.selected);
+	feedSingle = self.feedList.getSingleSubscription(self.selected);
+	self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feedSingle['FeedTitle'], html)));
+	self.updateTitle(feedSingle['FeedTitle'].replace("&#39;", "'"));
     except:
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.updateError()));
       self.updateTitle("Nie udało się zaktualizować subskrypcji RSS"); 
@@ -184,7 +190,7 @@ class rss_dragonfly(Window):
       html = self.feedList.getSingleSubscriptionToHTML(self.selected);
       feedSingle = self.feedList.getSingleSubscription(self.selected);
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feedSingle['FeedTitle'], html)));
-      self.updateTitle(feedSingle['FeedTitle']);
+      self.updateTitle(feedSingle['FeedTitle'].replace("&#39;", "'"));
       
     except:
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.updateError()));
