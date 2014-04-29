@@ -179,6 +179,13 @@ class rss_dragonfly(Window):
   def updateSelectedFeed(self):
     try:
       self.feedList.updateSelectedFeed(self.selected, Feed, Source);
+      
+      #updating content on screen
+      html = self.feedList.getSingleSubscriptionToHTML(self.selected);
+      feedSingle = self.feedList.getSingleSubscription(self.selected);
+      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feedSingle['FeedTitle'], html)));
+      self.updateTitle(feedSingle['FeedTitle']);
+      
     except:
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.updateError()));
       self.updateTitle("Nie udało się zaktualizować subskrypcji RSS");
