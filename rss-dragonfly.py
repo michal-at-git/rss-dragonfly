@@ -5,8 +5,7 @@
 """
 Main class of RSS Dragonfly
 """
-#TODO REFRESH SCREEN ON UPDATE SELECTED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#TODO update titlebar
+
 
 __version__ =  '1.1 - milestone 4' #/5
 
@@ -71,6 +70,7 @@ class rss_dragonfly(Window):
     #popUp signals:
     self.connect(self.addFeedPopup.send, SIGNAL("clicked()"), self.addFeed);
     self.connect(self.addFeedPopup.cancel, SIGNAL("clicked()"), self.addFeedPopup.close);
+    self.connect(self.aboutDialog.closeButton, SIGNAL("clicked()"), self.aboutDialog.close);
     
     self.reloadOneFeedButton.setDisabled(True);
     self.rmFeedButton.setDisabled(True);
@@ -81,10 +81,7 @@ class rss_dragonfly(Window):
   def readFromAddrBar(self):
     if len(str(self.addressInput.text())) > 1:
       if self.selected != False:
-	#double disabling selected element?
-	#print self.selected;
-
-	#self.feedListWidget.setItemSelected(self.selected, False);
+	
 	self.selected = False;
       
       source = Source();
@@ -96,7 +93,6 @@ class rss_dragonfly(Window):
 	  self.updateTitle(str(feed.feedTitle).replace("&#39;", "'"));
 	  self.rmFeedButton.setEnabled(False);
 	  self.reloadOneFeedButton.setEnabled(False);
-	  self.feedListWidget.clearSelection();
 	  self.saveFromAddrButton.setEnabled(True);
 	  self.addFeedPopup.name.setText(feed.feedTitle);
 	  
@@ -104,11 +100,12 @@ class rss_dragonfly(Window):
 	except:
 	  self.rssContentView.setHtml(unicode(FeedBox.FeedBox.parseError()));
 	  self.updateTitle("Nie udało się odczytać kanału RSS");
-	  
+
       else:
 	self.rssContentView.setHtml(unicode(FeedBox.FeedBox.downloadError()));
 	self.updateTitle("Nie udało się załadować kanału RSS");
-	
+      self.feedListWidget.clearSelection();
+
       
   def addFeed(self):
     if(len(str(self.addFeedPopup.address.text()))>5 and len(self.addFeedPopup.name.text()) >2):
