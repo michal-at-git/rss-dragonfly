@@ -12,9 +12,11 @@ reload(sys);
 sys.setdefaultencoding("utf-8");
 
 import img;
+import logo;
 
 class FeedBox(object):
   global css
+  global startCSS
   css = """
       body, html {margin: 0px;
       padding: 0px;
@@ -58,20 +60,53 @@ class FeedBox(object):
       padding: 4px;
       }
     """;
+  startCSS = """
+       body, html {margin: 0px;
+      padding: 0px;
+      font-size: 100%;
+      font-family: sans-serif;
+      color: #fff;
+      background-color: #0f7670;
+      text-align: center;}
+      
+      
+      header {margin: 0px;
+      display: table;
+      padding: 0px;
+      background-color:#dfe9df;
+      width: 100%;
+      height: 260px;
+        color: #005550;
+	text-shadow: 2px 2px 0px #fff;
+      }
+      h1 {margin-top: 20px;
+      margin-bottom: 20px;
+      margin-left: 20px;
+      font-size: 200%;}
+      
+      h2 { font-size: 140%;
+      margin: 0px;
+      margin-top: 7%;
+      }
+      
+      img {margin-top: 100px;}
+    
+  """;
   @staticmethod
   def start():
     return """<!doctype html>
     <head>
     <meta charset="utf-8" />
     <style>
-	"""+css+"""
+	"""+startCSS+"""
     </style>
     </head>
     <body>
     <header>
-    <h1>Witaj w RSS Dragonfly</h1>
+    <img src=\""""+logo.icon+"""\" alt="logo"/>
+    <h1>RSS Dragonfly</h1>
     </header>
-    <h2>Wersja 1.1 Alpha</h2>
+    <h2>Wersja 1.1</h2>
     </body>
     </html>
     """

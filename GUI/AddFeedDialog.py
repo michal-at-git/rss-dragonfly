@@ -40,7 +40,7 @@ class AddFeedDialog(QDialog):
     line3.addWidget(self.send);
     line3.addWidget(self.cancel);
     
-
+    self.setWindowIcon(QIcon('GUI/ikonka.png'));
     self.setLayout(mainLayout);
     self.setWindowTitle(u"Dodaj nowy kanał RSS");
     self.setGeometry(400, 180, 350,80);
