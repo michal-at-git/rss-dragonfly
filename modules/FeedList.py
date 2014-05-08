@@ -1,6 +1,15 @@
 #!/usr/bin/python
 # coding: utf-8
 
+"""
+FeedList class  
+"""
+
+
+__version__ =  '1.1' 
+
+
+
 from PyQt4.QtGui import *
 from Feed import Feed;
 from DB import DB;

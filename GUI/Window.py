@@ -4,8 +4,8 @@
 """
 Window front-end class 
 """
-__version__ =  '1.1 - milestone 4'
-__name__ = 'window';
+__version__ =  '1.1'
+__name__ = 'Window';
 
 from PyQt4.QtGui import *;
 from PyQt4.QtCore import *;
@@ -24,6 +24,7 @@ class Window(QWidget):
     self.rssContentView = QWebView(); 
     
     self.addressInput = QLineEdit();
+    self.addressInput.setFixedHeight(30);
     
     #it works with QT 4.7 and newer.
     try:
@@ -31,8 +32,9 @@ class Window(QWidget):
     except:
       0;
     self.goButton = QPushButton(u'Przejdź');
-    #self.fromFileButton = QPushButton(u'z pliku'); # w tym wydaniu zablokowany
+    self.goButton.setFixedHeight(30)
     self.closeButton = QPushButton(u'Zamknij');
+    self.closeButton.setFixedHeight(30);
     
     self.addNewFeedButton = QPushButton();
     self.reloadFeedsButton = QPushButton();
@@ -61,12 +63,17 @@ class Window(QWidget):
     #</DEFINITIONS>
     
     self.addNewFeedButton.setIcon(QIcon("GUI/plus.png"));
+    self.addNewFeedButton.setIconSize(QSize(20,20));
     self.reloadFeedsButton.setIcon(QIcon("GUI/reload.png"));
+    self.reloadFeedsButton.setIconSize(QSize(20,20));
     self.reloadOneFeedButton.setIcon(QIcon("GUI/reload_one.png"));
+    self.reloadOneFeedButton.setIconSize(QSize(20,20));
     self.rmFeedButton.setIcon(QIcon("GUI/minus.png"));
+    self.rmFeedButton.setIconSize(QSize(20,20));
     self.saveFromAddrButton.setIcon(QIcon("GUI/star.png"));
+    self.saveFromAddrButton.setIconSize(QSize(20,20));
     self.aboutButton.setIcon(QIcon("GUI/ikonka.png"));
-
+    self.aboutButton.setIconSize(QSize(20,20));
 
     #setting tooltips
     self.addNewFeedButton.setToolTip(u"Dodaj do listy nowy kanał RSS");
@@ -117,8 +124,7 @@ class Window(QWidget):
     self.setWindowTitle("RSS Dragonfly");
     self.rssContentView.setHtml(unicode(FeedBox.FeedBox.start()));
     
-    self.setMinimumWidth(600);
-    self.setMinimumHeight(400);
+    self.setMinimumSize(600, 400);
 
   def updateTitle(self, h1):
         self.setWindowTitle(unicode(h1+" | RSS Dragonfly"));

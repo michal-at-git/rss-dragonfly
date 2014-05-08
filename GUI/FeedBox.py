@@ -1,6 +1,12 @@
 #!/usr/bin/python
 # coding: utf-8
 
+"""
+FeedBox 
+"""
+
+
+__version__ =  '1.1' 
 import sys;
 reload(sys);
 sys.setdefaultencoding("utf-8");

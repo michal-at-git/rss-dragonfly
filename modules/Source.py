@@ -28,7 +28,5 @@ class Source:
     except:
       self.source = False;
     return self.source;
-  #v 1.2  
-  #def fromFile(self, fname):
-    #0;
+
 

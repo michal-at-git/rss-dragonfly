@@ -1,6 +1,13 @@
 #!/usr/bin/python
 # coding: utf-8
 
+"""
+Main class of RSS Dragonfly
+"""
+
+
+__version__ =  '1.1' 
+
 import sqlite3 as sqlite
 
 class DB:
