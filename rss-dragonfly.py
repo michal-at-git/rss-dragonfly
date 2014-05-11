@@ -69,7 +69,7 @@ class rss_dragonfly(Window):
     
     #popUp signals:
     self.connect(self.addFeedPopup.send, SIGNAL("clicked()"), self.addFeed);
-    self.connect(self.addFeedPopup.cancel, SIGNAL("clicked()"), self.addFeedPopup.close);
+    self.connect(self.addFeedPopup.cancel, SIGNAL("clicked()"), self.cancel);
     self.connect(self.aboutDialog.closeButton, SIGNAL("clicked()"), self.aboutDialog.close);
     
     self.reloadOneFeedButton.setDisabled(True);
@@ -192,8 +192,12 @@ class rss_dragonfly(Window):
     except:
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.updateError()));
       self.updateTitle("Nie udało się zaktualizować subskrypcji RSS");
-    
-    
+      
+  def cancel(self):
+    self.addFeedPopup.name.clear();
+    self.addFeedPopup.address.clear();
+    self.addFeedPopup.close();
+
 rsssq = QApplication(sys.argv)
 rss_sq = rss_dragonfly() 
 rss_sq.show()
