@@ -16,50 +16,201 @@ import logo;
 
 class FeedBox(object):
   global css
+  global standard
+  global lemon
+  global violet
+  global summer
+  global monochromatic  
   global startCSS
+  global theme
+  theme = "0xfff"
+
+  
+  standard = """
+  
+  body, html { 
+      color: #444;
+      background-color: #fff;
+      }
+  
+  header {
+      background: #dfe9df;
+      color: #005550;
+      box-shadow: 0px 0px 9px #cdc;
+      border-bottom: solid #ddd 1px;
+  }
+  h2 {
+        color: #444;
+    }
+    
+  img {
+        border: double #005550 3px;
+
+      }
+  .pubDate {
+    background: #dfe9df;
+    color: #444;
+    }
+    
+  """
+  
+  
+
+  
+  
+  lemon = """
+  
+  body, html { 
+      color: #363a74;
+      background-color: #fff;
+      }
+  
+  header {
+      background: #f8f4dd;
+      color: #00264c;
+      box-shadow: 0px 0px 9px #dcc;
+      border-bottom: solid #ddd 1px;
+  }
+  h2 {
+      color: #363a74;
+    }
+    
+  img {
+      border: double #00264c 3px;
+
+      }
+  .pubDate {
+      background: #f8f4dd;
+      color: #363a74;
+
+    }
+    
+  """
+   
+  violet = """
+  
+  body, html { 
+      color: #363a74;
+      background-color: #fff;
+      }
+  
+  header {
+      background: #520153;
+      color: #fff;
+      box-shadow: 0px 0px 9px #f08888;
+      border-bottom: solid #ddd 1px;
+  }
+  h2 {
+      color: #363a74;
+    }
+    
+  img {
+      border: double #00264c 3px;
+
+      }
+  .pubDate {
+      background: #520153;
+      color: #fff;
+    }
+    
+  """
+  summer = """
+  
+  body, html { 
+      color: #363a74;
+      background-color: #fff;
+      }
+  
+  header {
+      background: #4adbff;
+      color: #fff;
+      box-shadow: 0px 0px 9px #a2ff71;
+      border-bottom: solid #ddd 1px;
+  }
+  h2 {
+      color: #363a74;
+    }
+    
+  img {
+      border: double #00264c 3px;
+
+      }
+  .pubDate {
+      background: #ffab71;
+      color: #fff;
+    }
+    
+  """
+  
+  monochromatic = """
+  
+  body, html { 
+      color: #333;
+      background-color: #fff;
+      }
+  
+  header {
+      background: #bbb;
+      color: #333;
+      box-shadow: 0px 0px 9px #777;
+      border-bottom: solid #555 1px;
+  }
+  h2 {
+      color: #333;
+    }
+    
+  img {
+      border: double #00264c 3px;
+
+      }
+  .pubDate {
+      background: #ddd;
+      color: #444;
+    }
+    
+  """
+  
   css = """
       body, html {margin: 0px;
       padding: 0px;
       font-size: 100%;
       font-family: sans-serif;
-      color: #444;
-      background-color: #fff;}
+     }
       header {margin: 0px;
       display: table;
       padding: 0px;
-      background: #dfe9df;
-      color: #005550;
       width: 100%;
-      box-shadow: 0px 0px 9px #cdc;
-      border-bottom: solid #ddd 1px;
       }
+     
       h1 {margin-top: 20px;
       margin-bottom: 20px;
       margin-left: 20px;
       font-size: 200%;}
       
       h2 { font-size: 140%;
-      color: #444;
       margin: 0px;
       }
       img {max-width: 200px;
-      border: double #005550 3px;
       float: left;
       margin: 10px;}
       
       article {width: 90%;
       margin: auto;
       margin-top: 5%;
-      margin-bottom: 10%;}
+      margin-bottom: 10%;
+      display: table}
+      
       .pubDate {display: table; 
       margin: 0px;
       font-style: italic;
-      background: #dfe9df;
       width: 100%;
       margin: auto;
       padding: 4px;
       }
+      iframe {display: none}
     """;
+    
+    
   startCSS = """
        body, html {margin: 0px;
       padding: 0px;
@@ -67,9 +218,9 @@ class FeedBox(object):
       font-family: sans-serif;
       color: #fff;
       background-color: #0f7670;
-      text-align: center;}
-      
-      
+      text-align: center;
+      }
+  
       header {margin: 0px;
       display: table;
       padding: 0px;
@@ -93,8 +244,17 @@ class FeedBox(object):
     
   """;
   @staticmethod
+  def setTheme(themeID):
+    themes = [standard, lemon, violet, summer, monochromatic];
+    theme = themes[themeID]
+    global css
+    css = css +"""
+    """+ theme
+    
+  @staticmethod
   def start():
     return """<!doctype html>
+    <html>
     <head>
     <meta charset="utf-8" />
     <style>
@@ -106,7 +266,8 @@ class FeedBox(object):
     <img src=\""""+logo.icon+"""\" alt="logo"/>
     <h1>RSS Dragonfly</h1>
     </header>
-    <h2>Wersja 1.1</h2>
+    <h2>Version 1.2 pre-beta</h2>
+    znane błędy: <br/>* brak aktualizacji tytułu w items
     </body>
     </html>
     """
@@ -137,14 +298,14 @@ class FeedBox(object):
 	<style>"""+css+"""</style>
 	</head>
 	<header>
-	<h1>Nie udało się załadować kanału RSS</h1>
+	<h1>Unable to load RSS feed</h1>
 	</header>
 	<article>
 	<img src="""+img.error+""" alt="error" style="border: 0px;margin: 0px;"/>
-	<p style="margin-left: 70px; padding: 0px;">Prawdopodobne przyczyny:</p>
+	<p style="margin-left: 70px; padding: 0px;">Possible reasons:</p>
 	<ul style="margin-left: 70px">
-	<li>problem z połączeniem sieciowym</li>
-	<li>niepoprawnie wpisany adres</li>
+	<li>internet connection problem</li>
+	<li>incorrectly typed web address</li>
 	</ul></article>""";
   @staticmethod
   def parseError():
@@ -155,15 +316,15 @@ class FeedBox(object):
 	<style>"""+css+"""</style>
 	</head>
 	<header>
-	<h1>Nie udało się odczytać kanału RSS</h1>
+	<h1>Unable to open RSS feed</h1>
 	</header>
 	<article>
 	<img src="""+img.error+""" alt="error" style="border: 0px;margin: 0px;"/>
-	<p style="margin-left: 70px; padding: 0px;">Prawdopodobne przyczyny:</p>
+	<p style="margin-left: 70px; padding: 0px;">Possible reasons:</p>
 	<ul style="margin-left: 70px">
-	<li>pobrana treść nie jest kanałem RSS</li>
-	<li>poważny błąd składniowy w skrypcie kanału RSS</li>
-	<li>nieobsługiwane znaczniki</li>
+	<li>downloaded content could not be RSS feed</li>
+	<li>critical syntax error in RSS source</li>
+	<li>unsupported tags</li>
 	</ul></article>""";
   @staticmethod
   def updateError():
@@ -174,12 +335,13 @@ class FeedBox(object):
 	<style>"""+css+"""</style>
 	</head>
 	<header>
-	<h1>Nie udało się zaktualizować subskrypcji RSS</h1>
+	<h1>Unable to update RSS subscriptions</h1>
 	</header>
 	<article>
 	<img src="""+img.error+""" alt="error" style="border: 0px;margin: 0px;"/>
-	<p style="margin-left: 70px; padding: 0px;">Prawdopodobne przyczyny:</p>
+	<p style="margin-left: 70px; padding: 0px;">Possible reasons:</p>
 	<ul style="margin-left: 70px">
-	<li>problem z połączeniem sieciowym</li>
-	<li>poważny błąd składniowy w skrypcie kanału RSS</li>
+	<li>internet connection problem</li>
+	<li>critical syntax error in RSS source</li>
 	</ul></article>""";	
+	  

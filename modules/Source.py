@@ -4,13 +4,15 @@
 import pycurl;
 import cStringIO;
 from DB import DB;
-import os;
+from System import System;
 
 class Source:
-  source = False;
-  osId = os.uname();
+  
+  def __init__(self):
+    self.system = System("UNIX");
+    source = False;
+    
   def fromURL(self, url):
-    osIdLen = len(self.osId);
     try:
       self.url = url;
       handle = pycurl.Curl();
@@ -20,7 +22,7 @@ class Source:
       handle.setopt(handle.WRITEFUNCTION, buff.write);
       handle.setopt(handle.CONNECTTIMEOUT, 7);    
       handle.setopt(handle.TIMEOUT, 12);
-      handle.setopt(handle.USERAGENT, "Mozilla/5.0 ("+self.osId[0]+" "+self.osId[osIdLen-1]+"; python2; feed reader) RSS_Dragonfly/1.1");
+      handle.setopt(handle.USERAGENT, self.system.useragent);
       handle.perform();
       
       self.source = buff.getvalue();
@@ -29,4 +31,10 @@ class Source:
       self.source = False;
     return self.source;
 
+  def fromFile(self, path):
+    rssFile = open(path, 'r');
+    self.source = rssFile.read();    
+    rssFile.close();
+    return self.source;
+    
 

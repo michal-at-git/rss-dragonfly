@@ -10,8 +10,18 @@ __version__ =  '1.1'
 
 import sqlite3 as sqlite
 
+#from PyQt4.QtSql import *
+#from PyQt4.QtCore import *
+
 class DB:
   def __init__(self):
+    
+    #self.database = QSqlDatabase.addDatabase("SQLITE");
+    #self.database.setDatabaseName('dragonfly.db');
+    #self.database.open();
+    
+    #self.dbHandle = QSqlQuery(self.database);
+    
     self.dbHandle = sqlite.connect('dragonfly.db');
     with self.dbHandle:
       self.dbHandle.row_factory = sqlite.Row      
@@ -22,6 +32,9 @@ class DB:
     self.cursor.execute(query);
     self.dbHandle.commit();
   def getFeedList(self):
+    #self.dbHandle.execute('select * from feedList');
+    
+    
     self.cursor.execute('select * from feedList');
     raw = self.cursor.fetchall();
     
@@ -71,5 +84,15 @@ class DB:
     res = self.cursor.fetchall();
     
     return res[0][0];
+   
+  def getSingleRow(self, tableName):
+    self.cursor.execute('select * from '+str(tableName)+' limit 1');
+    res = self.cursor.fetchall();
+    return res[0];
+    
+  def getAllRows(self, tableName):
+    self.cursor.execute('select * from '+str(tableName));
+    res = self.cursor.fetchall();
+    return res[0];
 
     

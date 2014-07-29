@@ -9,14 +9,14 @@ sys.setdefaultencoding("utf-8")
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-class AddFeedDialog(QDialog):
+class EditFeedDialog(QDialog):
   def __init__(self, parent=None):
-    super(AddFeedDialog, self).__init__(parent);
+    super(EditFeedDialog, self).__init__(parent);
   
 
     self.name = QLineEdit();
     self.address = QLineEdit();
-    self.send = QPushButton("Add");
+    self.save = QPushButton("Save");
     self.cancel = QPushButton("Cancel");
     
     mainLayout = QVBoxLayout();
@@ -37,12 +37,14 @@ class AddFeedDialog(QDialog):
     line2.addWidget(addressLabel);
     line2.addWidget(self.address);
     
-    line3.addWidget(self.send);
+    line3.addWidget(self.save);
     line3.addWidget(self.cancel);
     
+    self.connect(self.cancel, SIGNAL("clicked()"), self.close);
+
     self.setWindowIcon(QIcon('GUI/ikonka.png'));
     self.setLayout(mainLayout);
-    self.setWindowTitle(u"Add new RSS feed");
+    self.setWindowTitle(u"Edit feed | "+self.name.text());
     self.setGeometry(400, 180, 350,80);
     self.setMaximumWidth(500);
     self.setMaximumHeight(100);

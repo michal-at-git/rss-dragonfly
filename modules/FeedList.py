@@ -97,3 +97,7 @@ class FeedList():
 	self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values ('+str(feed_id)+',\''+feed.title[i]+'\', \''+feed.pubDate[i]+'\', \''+feed.description[i]+'\')');
     except:
       raise Exception('downloadError', 'downloadError');
+  
+  def editSelectedFeed(self,selected, name, address):
+    self.dbHandle.send("update feedList set name=\'"+name+"\', addr=\'"+address+"\' where id="+str(self.feedListItems[selected]))
+    self.refresh();

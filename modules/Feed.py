@@ -16,7 +16,7 @@ from Source import Source;
 import time;
 
 class Feed:  
-  def __init__(self, source):
+  def __init__(self, source, origin = "web"):
     self.url = False;
     self.handle = False; 
     self.source = False;
@@ -48,13 +48,12 @@ class Feed:
 	    try:
 	      self.pubDate.append(time.strftime("%d.%m.%Y %H:%M",parsedSrc.entries[i].date));	      
 	    except AttributeError:
-	      self.pubDate.append("data nieczytelna");
+	      self.pubDate.append("unreadable date");
 	  
 
       self.description.append((parsedSrc.entries[i].description).replace("'", "&#39;"));
       
       
-##STWORZYĆ WYJĄTKI I REAKCJE NA PODSTAWIE KODÓW Z cURL'a!!!
       
   def toHTML(self):
     length = len(self.title)-1;
