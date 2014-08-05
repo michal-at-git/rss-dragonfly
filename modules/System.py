@@ -14,7 +14,7 @@ class System():
     import os;
     osId = os.uname();
     osIdLen = len(osId);
-    self.useragent = "Mozilla/5.0 ("+osId[0]+" "+osId[osIdLen-1]+") RSS_Dragonfly/1.2-";
+    self.useragent = "Mozilla/5.0 ("+osId[0]+" "+osId[osIdLen-1]+") RSS_Dragonfly/1.2";
     self.confPath = "~/.rss-dragonfly";
     print self.useragent;
     

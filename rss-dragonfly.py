@@ -180,18 +180,20 @@ class rss_dragonfly(Window):
     self.editFeedDialog.exec_();
   
   def editFeedSubmit(self):
-    name = self.editFeedDialog.name.text();
-    address = self.editFeedDialog.address.text();
-    
-    self.feedList.editSelectedFeed(self.selected, str(name), str(address));
-    self.editFeedDialog.close();
-    self.updateSelectedFeed();
-    
-    
+    try:
+      name = self.editFeedDialog.name.text();
+      address = self.editFeedDialog.address.text();
+      self.feedList.editSelectedFeed(self.selected, str(name), str(address), Feed, Source);
+      self.editFeedDialog.close();
+      self.feedListWidget.setCurrentRow(self.selected)
+      self.listItemSelected(self.feedListWidget.currentItem())
+    except:
+      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.updateError()));
+      self.updateTitle("Unable to update RSS feed"); 
+      
   def rmFeed(self):
     self.feedList.remove(self.selected);
     self.rmFeedButton.setEnabled(False);
-    #self.reloadOneFeedButton.setEnabled(False);
 
         
   def quit(self):
@@ -208,7 +210,6 @@ class rss_dragonfly(Window):
     
 
     self.rmFeedButton.setEnabled(True);
-    #self.reloadOneFeedButton.setEnabled(True);
     self.saveFromAddrButton.setEnabled(False);
 
     
@@ -284,7 +285,7 @@ class rss_dragonfly(Window):
       self.listItemSelected(self.feedListWidget.currentItem());
     else:
       self.rssContentView.setHtml(unicode(FeedBox.FeedBox.start()));
-      self.updateTitle("RSS Dragonfly");
+      self.setWindowTitle("RSS Dragonfly");
       self.addressInput.clear();
       self.saveFromAddrButton.setEnabled(False);
       self.feedListWidget.clearSelection();

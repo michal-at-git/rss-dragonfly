@@ -266,8 +266,7 @@ class FeedBox(object):
     <img src=\""""+logo.icon+"""\" alt="logo"/>
     <h1>RSS Dragonfly</h1>
     </header>
-    <h2>Version 1.2 pre-beta</h2>
-    znane błędy: <br/>* brak aktualizacji tytułu w items
+    <h2>Version 1.2 beta</h2>
     </body>
     </html>
     """
