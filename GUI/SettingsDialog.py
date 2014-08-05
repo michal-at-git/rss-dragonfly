@@ -20,7 +20,7 @@ class SettingsDialog(QDialog):
     self.saveButton = QPushButton("Save");
     self.themeLabel = QLabel("Theme: ");
     self.themeOptions = QComboBox();
-    self.themeOptions.addItems(["standard", "lemon", "violet", "summer", "monochromatic"]);
+    self.themeOptions.addItems(["standard", "lemon", "violet", "summer", "mono"]);
     self.themeOptions.setCurrentIndex(prefToken['theme']);
 
     

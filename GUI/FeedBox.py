@@ -20,7 +20,7 @@ class FeedBox(object):
   global lemon
   global violet
   global summer
-  global monochromatic  
+  global mono
   global startCSS
   global theme
   theme = "0xfff"
@@ -142,7 +142,7 @@ class FeedBox(object):
     
   """
   
-  monochromatic = """
+  mono = """
   
   body, html { 
       color: #333;
@@ -245,7 +245,7 @@ class FeedBox(object):
   """;
   @staticmethod
   def setTheme(themeID):
-    themes = [standard, lemon, violet, summer, monochromatic];
+    themes = [standard, lemon, violet, summer, mono];
     theme = themes[themeID]
     global css
     css = css +"""
