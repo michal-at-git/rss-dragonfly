@@ -31,6 +31,7 @@ class SettingsDialog(QDialog):
 
  
     self.startUpCheckBox.setChecked(prefToken["startup"]);
+    self.startMinimalizedCheckBox.setChecked(prefToken["startMinimalized"]);
    
     
     

@@ -12,7 +12,6 @@ class Tray(QObject):
   def __init__(self, window, qapp):
     self.visible = True;
     
-    
     self.window = window;
     self.tray = QSystemTrayIcon(QIcon("GUI/ikonka.png"), self.window);
 
@@ -35,12 +34,15 @@ class Tray(QObject):
     self.connect(self.updateAllAction, SIGNAL("triggered()"), self.updateAll);
     self.connect(self.settingsAction, SIGNAL("triggered()"), self.settings);
     self.connect(self.tray, SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self.iconActivated)
-   
+
+    
     self.tray.setContextMenu(self.trayMenu);
         
     self.tray.show();
 
 
+ 
+    
   def close(self):
     self.window.quit();
     

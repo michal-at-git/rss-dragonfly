@@ -96,19 +96,18 @@ class rss_dragonfly(Window):
     
 
     
-    #self.reloadOneFeedButton.setDisabled(True);
     self.rmFeedButton.setDisabled(True);
     self.saveFromAddrButton.setDisabled(True);
-
+    
   def start(self, tray):
     startDB = DB();
     settings = Settings(startDB);
     settings = settings.currentSettings();
 
     FeedBox.FeedBox.setTheme(settings['theme']); 
+    
     if(settings['startMinimalized']):
       tray.minimalization();
-    
     if(settings['startup']):
       self.updateAllFeeds();
 
@@ -301,9 +300,10 @@ rsssq = QApplication(sys.argv)
 rss_sq = rss_dragonfly() 
 
   
-tray = Tray(rss_sq, rsssq);
-rss_sq.start(tray);
 
 rss_sq.show()
+tray = Tray(rss_sq, rsssq);
+
+rss_sq.start(tray);
 
 rsssq.exec_()
