@@ -31,12 +31,10 @@ class Tray(QObject):
     self.trayMenu.addAction(self.settingsAction);
     self.trayMenu.addAction(self.quitAction);
     
-    #connect(tray, SIGNAL("customContextMenuRequested()"), self.opp);
     self.connect(self.quitAction, SIGNAL("triggered()"), self.close);
     self.connect(self.updateAllAction, SIGNAL("triggered()"), self.updateAll);
     self.connect(self.settingsAction, SIGNAL("triggered()"), self.settings);
     self.connect(self.tray, SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self.iconActivated)
-    #self.tray.minimizeAction.connect(self.minimalization);
    
     self.tray.setContextMenu(self.trayMenu);
         

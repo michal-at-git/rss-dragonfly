@@ -6,22 +6,15 @@ Main class of RSS Dragonfly
 """
 
 
-__version__ =  '1.1' 
+__version__ =  '1.2' 
 
 import sqlite3 as sqlite
 
-#from PyQt4.QtSql import *
-#from PyQt4.QtCore import *
+
 
 class DB:
   def __init__(self):
-    
-    #self.database = QSqlDatabase.addDatabase("SQLITE");
-    #self.database.setDatabaseName('dragonfly.db');
-    #self.database.open();
-    
-    #self.dbHandle = QSqlQuery(self.database);
-    
+ 
     self.dbHandle = sqlite.connect('dragonfly.db');
     with self.dbHandle:
       self.dbHandle.row_factory = sqlite.Row      
@@ -31,9 +24,7 @@ class DB:
   def send(self, query):
     self.cursor.execute(query);
     self.dbHandle.commit();
-  def getFeedList(self):
-    #self.dbHandle.execute('select * from feedList');
-    
+  def getFeedList(self):    
     
     self.cursor.execute('select * from feedList');
     raw = self.cursor.fetchall();
@@ -65,10 +56,7 @@ class DB:
     return {'id' : n[0][0], 'name' : n[0][1], 'addr' : n[0][2], 'FeedTitle':n[0][3], 'content':feeds};  
     
     
-  def getLastSubscription(self, feedId):
-    #self.cursor.execute('select * from feedList where id='+str(feedId));
-    #n = self.cursor.fetchall();
-    
+  def getLastSubscription(self, feedId):    
     self.cursor.execute('select * from items where feed_id='+str(feedId)+' order by id asc limit 1');
     n2 = self.cursor.fetchall();
     feeds = False;

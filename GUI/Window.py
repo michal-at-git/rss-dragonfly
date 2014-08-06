@@ -70,8 +70,6 @@ class Window(QWidget):
     self.addNewFeedButton.setIconSize(QSize(20,20));
     self.reloadFeedsButton.setIcon(QIcon("GUI/reload.png"));
     self.reloadFeedsButton.setIconSize(QSize(20,20));
-    #self.reloadOneFeedButton.setIcon(QIcon("GUI/reload_one.png"));
-    #self.reloadOneFeedButton.setIconSize(QSize(20,20));
     self.editFeedButton.setIcon(QIcon("GUI/edit.png"));
     self.editFeedButton.setIconSize(QSize(20,20));   
     self.rmFeedButton.setIcon(QIcon("GUI/minus.png"));
