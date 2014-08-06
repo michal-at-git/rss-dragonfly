@@ -89,7 +89,7 @@ class FeedList():
       source = source.fromURL(str(feed_from_db['addr']));
     
       feed = Feed(source);
-      size = (len(feed.title)-1);
+      size = (len(feed.title));
       
       self.dbHandle.send('delete from items where feed_id='+str(feed_id));
 
