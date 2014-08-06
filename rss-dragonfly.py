@@ -262,12 +262,18 @@ class rss_dragonfly(Window):
   def fromFile(self):
     rssFile = QFileDialog.getOpenFileName(self, 'rss', '*.rss');
     source = Source();
-    feed = Feed(source.fromFile(str(rssFile)), "file");
-    self.updateTitle(str(feed.feedTitle).replace("&#39;", "'"));
-    self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feed.feedTitle, feed.toHTML())));
+    
     self.saveFromAddrButton.setEnabled(False);
     self.addressInput.clear();
     self.feedListWidget.clearSelection();
+    try:
+      feed = Feed(source.fromFile(str(rssFile)), "file");
+      self.updateTitle(str(feed.feedTitle).replace("&#39;", "'"));
+      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feed.feedTitle, feed.toHTML())));
+    except:
+      self.rssContentView.setHtml(unicode(FeedBox.FeedBox.parseError()));
+      self.updateTitle("Unable to open RSS feed");
+
    
     
   def displaySettings(self):

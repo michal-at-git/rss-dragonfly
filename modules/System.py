@@ -22,7 +22,6 @@ class System():
   def nt(self):
     import sys;
     self.useragent = "Mozilla/5.0 ("+str(sys.platform)+") RSS_Dragonfly/1.2";
-    print self.useragent;
     return 0;
   
   def legacy(self):

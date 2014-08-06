@@ -21,11 +21,7 @@ class Window(QWidget):
   
   def drawWindow(self):  
     # <DEFINITIONS>
-    self.rssContentView = QWebView();
-    self.rssContentView.page().userAgentForUrl = "(image_loader) RSS_Dragonfly/1.2";
-    
-    #self.rssContentView
-    
+    self.rssContentView = QWebView();    
     self.addressInput = QLineEdit();
     self.addressInput.setFixedHeight(30);
     
