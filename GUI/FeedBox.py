@@ -282,9 +282,7 @@ class FeedBox(object):
     <header>
     <h1>"""+h1+"""</h1>
     </header>
-    <article>
     """+content+"""
-    </article>
     </body>
     </html> 
     """

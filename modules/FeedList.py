@@ -33,7 +33,7 @@ class FeedList():
     
     self.dbHandle.send('insert into feedList(name, addr, FeedTitle) values (\''+str(name)+'\',\''+str(address)+'\', \''+feed.feedTitle+'\')');
     
-    size = (len(feed.title))-1;
+    size = (len(feed.title));
 
     for i in range(0, size):
       self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values ('+str(self.dbHandle.lastID())+',\''+feed.title[i].replace("'","&#39;")+'\', \''+feed.pubDate[i].replace("'","&#39;")+'\', \''+feed.description[i].replace("'","&#39;")+'\')');
@@ -52,7 +52,7 @@ class FeedList():
   def getSingleSubscriptionToHTML(self, feed_id):
     
     feed = self.dbHandle.getSingleSubscription(self.feedListItems[feed_id]);
-    size = (len(feed['content']))-1;
+    size = (len(feed['content']));
     result = "";
     for i in range(0, size):
       result += """<article><h2>"""+feed['content'][i]['title']+"""</h2>
@@ -73,7 +73,7 @@ class FeedList():
 	feed = Feed(source);
 	self.dbHandle.send('delete from items where feed_id='+str(feed_id));
 
-	size = (len(feed.title)-1);
+	size = len(feed.title);
       
 	for i in range(0, size):
 	  self.dbHandle.send('insert into items(feed_id, title, pubDate, description) values ('+str(feed_id)+',\''+feed.title[i]+'\', \''+feed.pubDate[i]+'\', \''+feed.description[i]+'\')');
@@ -103,7 +103,7 @@ class FeedList():
     source = Source();
     source = source.fromURL(address);
     feed = Feed(source);
-    size = (len(feed.title)-1);
+    size = len(feed.title);
       
     self.dbHandle.send('delete from items where feed_id='+str(feed_id));
 

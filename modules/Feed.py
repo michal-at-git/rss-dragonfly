@@ -29,12 +29,12 @@ class Feed:
     
     self.source = source;
     parsedSrc = feedparser.parse(self.source);
-    tLength = len( parsedSrc.entries);
+    tLength = len(parsedSrc.entries);
     self.feedTitle = (parsedSrc.feed.title).replace("'", "&#39;");
 
     #here I'm trying to fix the problem with error from feedparser but...
     #with some versions it works, with another not...
-    for i in range(0, (tLength-1)):
+    for i in range(0, tLength):
       self.title.append((parsedSrc.entries[i].title).replace("'", "&#39;"));
       try:
 	self.pubDate.append(time.strftime("%d.%m.%Y %H:%M",parsedSrc.entries[i].published_parsed));
@@ -56,7 +56,7 @@ class Feed:
       
       
   def toHTML(self):
-    length = len(self.title)-1;
+    length = len(self.title);
     for i in range(0, length):
       self.content += """<article><h2>"""+self.title[i]+"""</h2>
       <div class=\"pubDate\">"""+self.pubDate[i]+"""</div>

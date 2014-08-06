@@ -108,7 +108,6 @@ class rss_dragonfly(Window):
     FeedBox.FeedBox.setTheme(settings['theme']); 
     if(settings['startMinimalized']):
       tray.minimalization();
-      print settings;
     
     if(settings['startup']):
       self.updateAllFeeds();
@@ -131,7 +130,7 @@ class rss_dragonfly(Window):
       source = source.fromURL(str(self.addressInput.text()));
       if(source != False):
 	try:
-	  feed = Feed(source);      
+	  feed = Feed(source);  
 	  self.rssContentView.setHtml(unicode(FeedBox.FeedBox.showFeeds(feed.feedTitle, feed.toHTML())));
 	  self.updateTitle(str(feed.feedTitle).replace("&#39;", "'"));
 	  self.rmFeedButton.setEnabled(False);
