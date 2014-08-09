@@ -36,7 +36,6 @@ class Window(QWidget):
     
     self.addNewFeedButton = QPushButton();
     self.reloadFeedsButton = QPushButton();
-    #self.reloadOneFeedButton = QPushButton();    
     self.rmFeedButton = QPushButton();
     self.editFeedButton = QPushButton();
     
@@ -120,9 +119,9 @@ class Window(QWidget):
     self.updateItemOption = QObject();
     self.deleteItemOption = QObject();
     
-    self.editItemAction = QAction(QIcon("GUI/edit.png"), "Edit selected item", self.editItemOption);
-    self.updateItemAction = QAction(QIcon("GUI/reload.png"), "Update selected item", self.updateItemOption);
-    self.deleteItemAction = QAction(QIcon("GUI/minus.png"), "delete", self.deleteItemOption);
+    self.editItemAction = QAction(QIcon("GUI/edit.png"), "Edit", self.editItemOption);
+    self.updateItemAction = QAction(QIcon("GUI/reload.png"), "Update", self.updateItemOption);
+    self.deleteItemAction = QAction(QIcon("GUI/minus.png"), "Delete", self.deleteItemOption);
     
     self.listItemMenu.addAction(self.editItemAction);
     self.listItemMenu.addAction(self.updateItemAction);
@@ -140,9 +139,7 @@ class Window(QWidget):
     self.addNewFeedButton.setToolTip(u"Add new RSS feed to list");
     self.reloadFeedsButton.setToolTip(u"Update feed list");
     self.rmFeedButton.setToolTip(u"Delete selected item from list");
-    #self.reloadOneFeedButton.setToolTip(u"Update selected feed"); 
     self.goButton.setToolTip(u"Open feed");
-    #self.closeButton.setToolTip(u"Quit from RSS Dragonfly");
     self.saveFromAddrButton.setToolTip(u"Save this feed to list");
     self.menuButton.setToolTip(u"Menu");
     self.menuButton.setFixedWidth(155);
@@ -160,14 +157,11 @@ class Window(QWidget):
     
     self.listButtonsLayout.addWidget(self.addNewFeedButton);
     self.listButtonsLayout.addWidget(self.rmFeedButton);
-    #self.listButtonsLayout.addWidget(self.editFeedButton); # ZA DUŻO MIEJSCA POBIERA... TRZEBA ZROBIĆ COŚ Z WYMIARAMIII!!!!!!!!!!!  
     self.listButtonsLayout.addWidget(self.reloadFeedsButton);
-    #self.listButtonsLayout.addWidget(self.reloadOneFeedButton);
 
     self.topLinLayout.addWidget(self.saveFromAddrButton);
     self.topLinLayout.addWidget(self.addressInput);
     self.topLinLayout.addWidget(self.goButton);
-    #self.topLinLayout.addWidget(self.closeButton);
     self.topLinLayout.addWidget(self.menuButton);
 
     

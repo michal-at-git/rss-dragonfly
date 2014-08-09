@@ -18,7 +18,6 @@ class Updater(QWidget):
     self.setFixedSize(380,200);
     self.setWindowTitle("RSS Dragonfly updater");
     self.info = QLabel("");
-    self.updateButton = QPushButton("Upgrade");
     self.mainLayout = QHBoxLayout();
     self.mainLayout.addWidget(self.info);
     self.setLayout(self.mainLayout);
