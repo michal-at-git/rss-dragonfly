@@ -46,8 +46,10 @@ class Window(QWidget):
     self.feedListWidget = QListWidget();
 
     
-    
-    self.feedListWidget.setMinimumWidth(200);
+    self.rssContentView.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding);
+    self.rssContentView.setMinimumSize(370, 370);
+
+    self.feedListWidget.setFixedWidth(270);
     
 
     #layouts
@@ -180,7 +182,7 @@ class Window(QWidget):
     self.setWindowTitle("RSS Dragonfly");
     self.rssContentView.setHtml(unicode(FeedBox.FeedBox.start()));
     
-    self.setMinimumSize(600, 400);
+    self.setMinimumSize(800, 400);
 
   def updateTitle(self, h1):
         self.setWindowTitle(unicode(h1+" | RSS Dragonfly"));

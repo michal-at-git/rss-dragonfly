@@ -19,8 +19,8 @@ class AboutDialog(QDialog):
     self.closeButton.setFixedWidth(100);
     
     
-    header = """<img src="GUI/ikonka.png" alt="" style="float: left" /> <p style="float: left; margin: 4px"><b>RSS Dragonfly version 1.2</b></p> 
-    <p style="float: left; margin: 4px">(c) 2013-2014</p>""";
+    header = """<img src="GUI/ikonka.png" alt="" style="float: left" /> <p style="float: left; margin: 4px"><b>RSS Dragonfly version 1.3</b></p> 
+    <p style="float: left; margin: 4px">(c) 2013-2015</p>""";
     
     about = """<p><b>Used modules:</b></p>
     - <a href="http://www.riverbankcomputing.co.uk/software/pyqt/intro">PyQt4</a><br/>

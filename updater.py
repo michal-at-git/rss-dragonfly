@@ -42,7 +42,7 @@ class Updater(QWidget):
     self.connect(self.toUpdate, SIGNAL("triggered()"), self.newVersionAvaibleMessg);
     self.connect(self.actual, SIGNAL("triggered()"), self.usingActualMessg);
     self.connect(self.checking, SIGNAL("triggered()"), self.checkForUpdatesMessage);
-  
+    self.info.setOpenExternalLinks(True)
    
   def checkForUpdates(self):
     self.checking.emit(SIGNAL("triggered()"));

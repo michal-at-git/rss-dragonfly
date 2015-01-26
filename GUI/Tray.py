@@ -9,9 +9,9 @@ class Tray(QObject):
 
       
       
-  def __init__(self, window, qapp):
+  def __init__(self,window,qapp, parent=None):
+    super(Tray, self).__init__(parent);
     self.visible = True;
-    
     self.window = window;
     self.tray = QSystemTrayIcon(QIcon("GUI/ikonka.png"), self.window);
 
@@ -22,7 +22,7 @@ class Tray(QObject):
     
     self.updateAllAction = QAction("&Update all feeds", self.updateAllOption); 
     self.settingsAction = QAction("Se&ttings", self.settingsOption);    
-    self.quitAction = QAction("&Quit", self.quitOption);
+    self.quitAction = QAction("Quit", self.quitOption);
     
     
     self.trayMenu = QMenu();

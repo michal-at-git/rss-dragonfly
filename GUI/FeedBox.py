@@ -266,7 +266,7 @@ class FeedBox(object):
     <img src=\""""+logo.icon+"""\" alt="logo"/>
     <h1>RSS Dragonfly</h1>
     </header>
-    <h2>Version 1.2</h2>
+    <h2>Version 1.3</h2>
     </body>
     </html>
     """
